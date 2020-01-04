@@ -1,0 +1,23 @@
+#mgt-20{
+    margin-top: 20px;
+}
+.small-text{
+    font-size: 10px;
+    color:rgba(128, 128, 128, 0.664);
+}
+.border{
+    border: solid 0.5px grey;
+    border-radius: 20px 20px;
+    padding: 20px 30px;
+    margin-top: 10px;
+}
+mat-form-field button{
+    position: absolute;
+    top: 50%;
+    right: 20px;
+}
+mat-form-field mat-icon{
+    transform:  translateY(-10px);
+    font-size: 25px;
+    margin-right: 8px;
+}

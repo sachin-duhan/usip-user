@@ -1,0 +1,76 @@
+<div class="center">
+    <div class="pd-20"></div>
+    <h2 class="mg-0 blue-grey-text text-darken-4 margin-small">Welcome to Internship</h2>
+    <p class="lead pd-10 mg-0 hide-on-small-and-down" id="p-squeez">Providing experience through Education, Innovation and Hard work for the service of humanity</p>
+    <div class="mg-20 pd-20 mgb-0 pdb-0">
+        <div class="row">
+            <div class="col s6 m6 l3 transparent pd-40 pdb-0 center pointer" routerLink="/usip/intern/profile">
+                <div class="pd-10 width-250 hoverable center">
+                    <mat-icon class="blue-text text-accent-2 fa-2x fa fa-user-circle pd-0 mg-0"></mat-icon>
+                    <h6 class="pd-10 mg-0">View Profile</h6>
+                </div>
+            </div>
+            <div class="col s6 m6 l3 transparent pd-40 pdb-0 center" (click)="openAddReport()">
+                <div class="pd-10 width-250 hoverable center">
+                    <mat-icon class="red-text text-accent-2 fa-2x fa fa-file-pdf-o pd-0 mg-0"></mat-icon>
+                    <h6 class="pd-10 mg-0">Add Report</h6>
+                </div>
+            </div>
+
+            <br class="show-on-small hide-on-med-and-up">
+            <br class="show-on-small hide-on-med-and-up">
+
+            <div class="col s6 m6 l3 transparent pd-40 pdb-0 center" (click)="openOfficer()">
+                <div class="pd-10 width-250 hoverable center">
+                    <mat-icon class="purple-text text-darken-1 fa-2x fa fa-university pd-0 mg-0"></mat-icon>
+                    <h6 class="pd-10  mg-0">Reporting officer</h6>
+                </div>
+            </div>
+            <div class="col s6 m6 l3 transparent pd-40 pdb-0 center" (click)="openTasks()">
+                <div class="pd-10 width-250 hoverable center">
+                    <mat-icon class="teal-text text-darken-1 fa-2x pd-0 mg-0">work</mat-icon>
+                    <h6 class="pd-10 mg-0">Tasks Completed</h6>
+                </div>
+            </div>
+            <br><br>
+            <div class="col m6 s12 height-200">
+                <div class="pd-20 mg-20 pdb-0 mgb-0">
+                    <mat-card class="mg-0 left-align">
+                        <h5>Notifications
+                            <mat-icon class="right orange-text text-darken-2 fa fa-bell"></mat-icon>
+                        </h5>
+                        <div class="pd-0 mg-0" *ngIf="internNoti.length > 0">
+                            <ul *ngFor="let noti of internNoti;let i = index">
+                                <li *ngIf="i<2">{{noti.title}} <span class="right grey-text font-20">{{noti.date | date:shortDate}}</span></li>
+                            </ul>
+                            <button [routerLink]="['/usip/intern/notification']" class="right mg-20" mat-button>load more</button>
+                        </div>
+                        <div class="center" *ngIf="internNoti.length < 1">
+                            <h3 class="mat-2">No Notifications found</h3>
+                        </div>
+                    </mat-card>
+                </div>
+            </div>
+            <div class="col m6 s12 height-200">
+                <div class="pd-20 mg-20 pdb-0 mgb-0">
+                    <mat-card class="mg-0 left-align">
+                        <h5>Internship Reports
+                            <mat-icon class="right red-text fa fa-file-pdf-o text-accent-2"></mat-icon>
+                        </h5>
+                        <ul *ngIf="report.length > 0">
+                            <li *ngFor="let rep of report;let i=index" class="truncate text-truncate pdb-20">
+                                <span>{{i+1}}. </span>{{rep.description}}
+                                <br>
+                                <span class="left grey-text small-font-12">{{rep.start | date:shortDate}} - {{rep.end | date:shortDate}}</span>
+                                <span class="right grey-text small-font-12">{{rep.date | date:shortDate}}</span>
+                            </li>
+                        </ul>
+                        <div *ngIf="report.length <= 0" class="pd-20 center">
+                            <h3 class="mat-h3">No Reports submitted</h3>
+                        </div>
+                    </mat-card>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

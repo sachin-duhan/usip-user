@@ -1,0 +1,13 @@
+.small-font {
+    font-size: 11px;
+    padding-top: 10px;
+}
+
+.mg-20 {
+    margin: 20px;
+    margin-top: 0px;
+}
+
+.height-500 {
+    min-height: 400px;
+}

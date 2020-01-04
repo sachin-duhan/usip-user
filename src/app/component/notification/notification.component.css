@@ -1,0 +1,31 @@
+#notification-footer{
+    position: absolute;
+    bottom: -5px;
+    right: 25px;
+}
+table{
+    margin-bottom: 25px;
+}
+mat-card{
+    min-height: 620px;
+}                                                                                                                                                                                                                                                                                                                                                                                                                                                                       
+.shadow-lg{
+    box-shadow: 2px 0px 80px rgba(0, 0, 0, 0.3);
+    background: linear-gradient(rgba(255,255,255,0.9),rgba(255,255,255,0.8));
+}
+.backgrund-notification{
+    background-image: url('/assets/notificationsvg.svg');
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center;
+}
+mat-card-content{
+    padding:10px 25px;
+}
+#big_font{
+    font-size: 15px;
+    font-weight: 400;
+}
+.small-font-12{
+    margin-top: 7px;
+}

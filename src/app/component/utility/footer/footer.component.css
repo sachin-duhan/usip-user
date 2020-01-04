@@ -1,0 +1,9 @@
+footer .row{
+    margin-bottom: 0;
+}
+footer{
+    min-height: 40vh;
+}
+h6{
+    font-size: 22px;
+}

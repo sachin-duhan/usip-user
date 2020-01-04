@@ -1,0 +1,19 @@
+<h3 class="mat-h2 pd-20 grey lighten-5">Intern Suggestions
+    <mat-icon class="right blue-grey-text text-darken-4">thumbs_up_down</mat-icon>
+</h3>
+<p class="lead justify-content-center grey-text text-darken-2">
+    Interns are requested to kindly suggest changes or any scope of improvement for the authorities regarding USIP. We will consider your suggestion and improve upon it.
+</p>
+<form [formGroup]="suggestion" class="row" (submit)="submitForm()">
+    <mat-form-field class="col s12">
+        <mat-label>Subject</mat-label>
+        <input matInput type="text" placeholder="Subject for the suggestion" formControlName="title" required>
+    </mat-form-field>
+
+    <mat-form-field class="col s12">
+        <mat-label>Details</mat-label>
+        <textarea matInput rows="15" placeholder="Leave a comment" formControlName="details" required></textarea>
+    </mat-form-field>
+
+    <button mat-button [disabled]="!suggestion.valid" class="col s12 red white-text" type="submit">Submit</button>
+</form>

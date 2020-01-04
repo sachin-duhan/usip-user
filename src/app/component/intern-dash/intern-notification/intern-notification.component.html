@@ -1,0 +1,63 @@
+<div class="row pd-20 center">
+    <h4 class="pd-10 mg-0">Notifications</h4>
+    <span class="font-20 grey-text">
+      All USIP interns must follow and act according to the notifications listed below 
+    </span>
+</div>
+<div class="container row">
+    <div class="col m6 s12">
+        <mat-card class="mg-10 height-500">
+            <mat-card-title class="mat-h2">
+                Public
+                <div class="right">
+                    <mat-icon class="green-text text-darken01">people</mat-icon>
+                </div>
+            </mat-card-title>
+            <mat-card-content>
+                <table *ngIf="pNotification.length > 0; else noPNoti" class="highlight">
+                    <tbody>
+                        <tr *ngFor="let noti of pNotification">
+                            <td>{{noti.title}}
+                                <div class="right grey-text small-font">{{noti.date | date:shortDate}}</div>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+                <ng-template #noPNoti>
+                    <div class="pd-40 center">
+                        <h5>No Intern Notifications Active</h5>
+                    </div>
+                </ng-template>
+            </mat-card-content>
+        </mat-card>
+    </div>
+    <div class="col m6 s12">
+        <br class="hide-on-med-and-up">
+        <mat-card class="mg-10 height-500">
+            <mat-card-title class="mat-h2">
+                Intern
+                <div class="right">
+                    <mat-icon class="blue-text text-accent-2">person</mat-icon>
+                </div>
+            </mat-card-title>
+            <mat-card-content>
+
+                <table *ngIf="internNotification.length > 0; else noInternNoti" class="highlight">
+                    <tbody>
+                        <tr *ngFor="let noti of internNotification">
+                            <td>{{noti.title}}
+                                <div class="right grey-text small-font">{{noti.date | date:shortDate}}</div>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+
+                <ng-template #noInternNoti>
+                    <div class="pd-40 center">
+                        <h5>No Public Notifications Active</h5>
+                    </div>
+                </ng-template>
+            </mat-card-content>
+        </mat-card>
+    </div>
+</div>

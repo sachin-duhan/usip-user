@@ -1,0 +1,81 @@
+mat-form-field mat-select{
+    padding: 5px;
+    padding-left: 10px;
+    line-height: 2em;
+    border-bottom: 1px solid rgb(26, 25, 25,0.5);
+}
+mat-form-field mat-icon{
+    font-size: 30px;
+    margin-right: 8px;
+}
+
+.hidden{
+    display: none;
+}
+/* input:not(.browser-default):focus:not([readonly]){
+    border-bottom: 1px solid black;
+} */
+
+.background-light{
+    transition-duration: 1s;
+    background: linear-gradient(rgba(255, 255, 255, 0.858), rgba(255, 255, 255, 0.595));
+    box-shadow: 2px 0px 80px rgba(0, 0, 0, 0.3);
+}
+.background-light:hover{
+    background: linear-gradient(rgba(255,255,255,0.9), rgba(255,255,255,0.9));
+}
+.push_bottom{
+    position: fixed;
+    bottom: 30px;
+    right: 30px;
+    z-index: 15;
+}
+.tooltip-arrow{
+    background: white;
+    color: grey;
+    padding: 10px 20px;
+    font-size: 20px;
+    line-height: 20px;
+}
+.tooltip-arrow::after{
+    content: '';
+    width: 20px;
+    height: 20px;
+    position: absolute;
+    right: -10px;
+    top: 20px;
+    transform: translateX(45deg);
+    background-color: white;
+}
+.try{
+    background: url('/assets/triangle-back.svg');
+    background-position: center;
+    background-size: cover;
+    background-repeat: no-repeat;
+}
+img{
+    transform: scale(0.7);
+    position: absolute;
+    top: 17vh;
+    left: -50px;
+}
+.display-fun{
+    width: 100%;
+    height: 91vh;
+    position: fixed;
+    top: 9vh;
+    left: 0;
+    background: rgba(255, 255, 255, 0.9);
+    z-index: 12;
+}
+.display-fun h4{
+    position: absolute;
+    top: 35%;
+    left: 40%;
+}
+.big-font{
+    transform: translateX(-30px);
+    font-size: 100px;
+    margin: 0px;
+    padding: 0px;
+}

@@ -1,0 +1,112 @@
+<div class="push_bottom" (click)="openPassword()">
+    <button mat-fab matTooltip="Edit Password" matTooltipPosition="left" class="red">
+      <mat-icon class="white-text">edit</mat-icon>
+    </button>
+</div>
+
+<div class="row center">
+    <h4 class="pd-0 margin-small mg-0">Welcome to Dashboard</h4>
+</div>
+<div class="row">
+    <div class="col m8 s12 pd-40">
+        <mat-card class="mg-20" id="mat-card">
+            <mat-card-title>{{intern.name | titlecase}}
+                <mat-icon class="right blue-grey-text text-darken-2 pdr-10 pdt-10">dashboard</mat-icon>
+            </mat-card-title>
+            <mat-card-subtitle>{{period.start | date:shortDate}} - {{period.end | date:shortDate}}
+                <div class="right small-font">{{intern.phone}}</div>
+            </mat-card-subtitle>
+
+            <mat-card-content class="row">
+                <div class="col s12 m12 pd-20">
+                    <mat-accordion>
+                        <mat-expansion-panel [expanded]="true">
+                            <mat-expansion-panel-header>
+                                <mat-panel-title>
+                                    <mat-icon class="pdr-10 orange-text text-darken-2">account_circle</mat-icon>
+                                    Personal Info
+                                </mat-panel-title>
+                            </mat-expansion-panel-header>
+                            <table class="highlight">
+                                <tbody>
+                                    <tr>
+                                        <td>Branch</td>
+                                        <td>{{intern.branch}}</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Email</td>
+                                        <td>{{intern.email}}</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Domain</td>
+                                        <td>{{intern.domain}}</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </mat-expansion-panel>
+                        <mat-expansion-panel (opened)="panelOpenState = true" (closed)="panelOpenState = false">
+                            <mat-expansion-panel-header>
+                                <mat-panel-title>
+                                    <mat-icon class="purple-text text-darken-1 pdr-10">account_balance_wallet</mat-icon>
+                                    Bank Details
+                                </mat-panel-title>
+                            </mat-expansion-panel-header>
+                            <table class="highlight">
+                                <tbody>
+                                    <tr>
+                                        <td>Bank Name</td>
+                                        <td class="red-text" *ngIf="bank.bankName == ' '">Not filled</td>
+                                        <td *ngIf="bank.bankName != ' '">{{bank.bankName}}</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Account No</td>
+                                        <td class="red-text" *ngIf="bank.bankAc == intern._id">Not filled</td>
+                                        <td *ngIf="bank.bankAc != intern._id">{{bank.bankAc}}</td>
+                                    </tr>
+                                    <tr>
+                                        <td>IFSC</td>
+                                        <td class="red-text" *ngIf="bank.ifsc == ' '">Not filled</td>
+                                        <td *ngIf="bank.ifsc != ' '">{{bank.ifsc}}</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </mat-expansion-panel>
+                        <mat-expansion-panel>
+                            <mat-expansion-panel-header>
+                                <mat-panel-title>
+                                    <mat-icon class="pdr-10 green-text">work</mat-icon>
+                                    Reporting officer
+                                </mat-panel-title>
+                            </mat-expansion-panel-header>
+                            <table class="highlight">
+                                <tbody>
+                                    <tr>
+                                        <td>Reporting officer</td>
+                                        <td>{{officer.name}}</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Department</td>
+                                        <td>{{officer.deptt}}</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Contact Number</td>
+                                        <td>{{officer.phone}}</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Email</td>
+                                        <td>{{officer.email}}</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </mat-expansion-panel>
+                    </mat-accordion>
+                </div>
+            </mat-card-content>
+        </mat-card>
+    </div>
+    <div class="col hide-on-small-and-down pd-40 m4 center">
+        <h3 class="mat-h2 mg-0 pd-10">Delhi Technological University</h3>
+        <img class="pd-20" src="https://upload.wikimedia.org/wikipedia/en/b/b5/DTU%2C_Delhi_official_logo.png" class="circle" alt="photo">
+        <h4 class="mat-h3 mg-0 pd-10">University Student Internship Programme</h4>
+    </div>
+</div>

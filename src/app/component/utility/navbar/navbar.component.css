@@ -1,0 +1,35 @@
+nav {
+    background-color: white;
+    opacity: 1;
+    padding-left: 7%;
+    box-shadow: 1px 0 11px rgba(0, 0, 0, 0.14), 0.6px 0 20px rgba(0, 0, 0, 0.1);
+}
+
+nav img {
+    padding-top: 12px;
+}
+
+nav button {
+    margin: 12px;
+}
+
+#side-nav-container {
+    position: fixed;
+    top: 60px;
+    right: 12px;
+    width: 230px;
+    height: 170px;
+    transition: 300ms ease-in-out;
+    z-index: 123;
+    border-radius: 8px;
+    box-shadow: 2px 0 18px rgba(0, 0, 0, 0.14), 1px 0 28px rgba(0, 0, 0, 0.1);
+}
+
+#top-chip {
+    padding: 10px;
+    float: right;
+    transform: rotate(-45deg);
+    position: absolute;
+    top: -7px;
+    right: 10px;
+}

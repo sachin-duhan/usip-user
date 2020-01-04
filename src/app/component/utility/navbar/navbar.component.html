@@ -1,0 +1,32 @@
+<div class="navbar-fixed">
+    <nav class="black-text" id="main-nav">
+        <div class="nav-wrapper">
+            <a routerLink="/" class="main-brand blue-grey-text text-darken-4">
+                <img src="assets/logo.png" class="pdt-10" height="45px" width="auto" alt="logo">
+            </a>
+            <button (click)="addClass()" mat-icon-button class="hide-on-large-only right sidenav-button mg-10">
+            <mat-icon>menu</mat-icon>
+        </button>
+            <ul class="right hide-on-med-and-down black-text">
+                <li *ngIf="admin"><a routerLink="/admin/dashboard" class="blue-grey-text text-darken-3">Dashboard</a></li>
+                <li *ngIf="intern"><a routerLink="/usip/intern" class="blue-grey-text text-darken-3">Dashboard</a></li>
+                <li><a routerLink="/notification" class="blue-grey-text text-darken-3">Notification</a></li>
+                <li *ngIf="!admin && !intern"><a routerLink="/login" class="blue-grey-text text-darken-3">Login</a></li>
+                <li *ngIf="admin || intern" class="active indigo white-text" (click)="logout()"><a>Logout</a></li>
+                <li *ngIf="!admin && !intern" class="active indigo"><a routerLink="/register" class="white-text">Apply</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <div *ngIf="show" class="white hide-on-large-only" id="side-nav-container">
+        <div id="top-chip" class="white float-right"></div>
+        <mat-list>
+            <mat-list-item class="pointer" routerLink="/admin/dashboard" *ngIf="admin"><a class="blue-grey-text text-darken-3">Dashboard</a></mat-list-item>
+            <mat-list-item class="pointer" routerLink="/usip/intern" *ngIf="intern"><a class="blue-grey-text text-darken-3">Dashboard</a></mat-list-item>
+            <mat-list-item class="pointer" routerLink="/notification"><a class="blue-grey-text text-darken-3">Notification</a></mat-list-item>
+            <mat-list-item class="pointer" routerLink="/login" *ngIf="!admin && !intern"><a class="blue-grey-text text-darken-3">Login</a></mat-list-item>
+            <mat-list-item class="pointer" (click)="logout()" *ngIf="admin || intern" class="blue-grey-text text-darken-3">Logout</mat-list-item>
+            <mat-list-item class="pointer" routerLink="/register" *ngIf="!admin && !intern" class="blue-grey-text text-darken-3">Apply</mat-list-item>
+        </mat-list>
+    </div>
+</div>

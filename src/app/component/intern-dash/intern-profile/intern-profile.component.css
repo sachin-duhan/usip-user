@@ -1,0 +1,29 @@
+.border-left {
+    border-left: 0.8px solid rgba(128, 128, 128, 0.767);
+}
+
+.small-font {
+    font-size: 12px;
+}
+
+.mat-card:not([class*=mat-elevation-z]) {
+    box-shadow: none;
+    background-image: linear-gradient(#ffffff, #ffffff1c);
+}
+
+#mat-card {
+    background: rgba(0, 0, 0, 0);
+}
+
+@media (max-width: 768px) {
+    .margin-small {
+        margin-top: 20px;
+    }
+}
+
+.push_bottom {
+    position: fixed;
+    bottom: 20px;
+    right: 40px;
+    z-index: 12;
+}

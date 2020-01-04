@@ -1,0 +1,52 @@
+<mat-sidenav-container class="sidenav-container grey lighten-5">
+    <mat-sidenav #drawer class="sidenav dark-blue" fixedInViewport="true" [attr.role]="(isHandset$ | async) ? 'dialog' : 'navigation'" [mode]="(isHandset$ | async) ? 'over' : 'side'" [opened]="!(isHandset$ | async)">
+        <mat-nav-list>
+            <div mat-list-item class="pdl-10">
+                <button mat-icon-button routerLink="/usip/intern">
+                    <mat-icon class="white-text" id="hover-circle">home</mat-icon>
+                </button>
+            </div>
+            <div mat-list-item class="pdl-10">
+                <button mat-icon-button matTooltip="View Profile" matTooltipPosition="right" routerLink="/usip/intern/profile">
+                    <mat-icon class="white-text" id="hover-circle">account_circle</mat-icon>
+                </button></div>
+            <div mat-list-item class="pdl-10">
+                <button mat-icon-button routerLink="/usip/intern/notification" matTooltip="Notifications available" matTooltipClass="matTooltip" matTooltipPosition="right">
+                    <mat-icon class="white-text" id="hover-circle">notifications_active</mat-icon>
+                </button>
+            </div>
+        </mat-nav-list>
+        <mat-nav-list class="push_bottom">
+            <div mat-list-item class="pdl-10"><button mat-icon-button matTooltip="Reports submitted" matTooltipPosition="right" routerLink="/usip/intern/settings">
+                    <mat-icon class="white-text" id="hover-circle">insert_chart</mat-icon>
+                </button></div>
+            <div (click)="logout()" mat-list-item class="pdl-10"><button mat-icon-button matTooltip="Logout" matTooltipPosition="right">
+                    <mat-icon class="white-text" id="hover-circle">lock</mat-icon>
+                </button></div>
+        </mat-nav-list>
+    </mat-sidenav>
+
+    <mat-sidenav-content id="intern-dashboard-background">
+        <mat-toolbar class="transparent">
+            <div class="row" id="name-display-container">
+                <div class="col s2">
+                    <img src="http://lorempixel.com/200/200/" class="circle responsive-img">
+                </div>
+                <div class="col s10">
+                    <span class="mat-h3">{{name | titlecase}}</span>
+                </div>
+            </div>
+            <div class="spacer"></div>
+            <button type="button" (click)="openFormDialog()" mat-button class="mgr-10">
+                <span class="mat-h4 hide-on-small-and-down">Bank Details</span>
+                <span class="hide-on-med-and-up valign-wrapper" matTooltip="Bank details" matTooltipPosition="below">
+                    <mat-icon>account_balance</mat-icon>
+                </span>
+            </button>
+            <button type="button" aria-label="Toggle sidenav" mat-icon-button (click)="drawer.toggle()">
+                <mat-icon aria-label="Side nav toggle icon">menu</mat-icon>
+            </button>
+        </mat-toolbar>
+        <router-outlet></router-outlet>
+    </mat-sidenav-content>
+</mat-sidenav-container>
