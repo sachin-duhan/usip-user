@@ -26,21 +26,20 @@ export class InternDashNavComponent implements OnInit {
     private _intern: InternService) { }
 
   // intern details 
-  internDetails;
-  name: String;
-  open: Boolean = false;
+  public internDetails;
+  public name: String = "";
+  public open: Boolean = false;
   isHandset$: Observable<boolean> = this.breakpointObserver.observe(Breakpoints.Handset).pipe(map(result => result.matches));
 
   ngOnInit(): void {
     const credentials = jwt_decode(localStorage.getItem('token'));
-    // console.log(credentials);
     setInterval(() => {
       if (!this._auth.loggedIn() && (credentials.exp < Date.now())) { this.router.navigateByUrl('/'); }
     }, 1000);
 
     // getting the login 
     this._intern.get_specific_intern_by_id(credentials.id).subscribe(res => {
-      console.log(res);
+      // console.log(res);
       this.name = res.intern.pInfo.name;
       this.internDetails = res.intern;
     }, err => {
@@ -53,7 +52,7 @@ export class InternDashNavComponent implements OnInit {
 
     // get the bank status!
     this._registerService.applicationStatus('bank').subscribe(res => {
-      this.open = res.status[res.status.length - 1].isOpen;
+      this.open = res.status;
     }, err => {
       console.log(err);
       this._toast.error('Report to Office', 'Something went wrong');
@@ -73,14 +72,14 @@ export class InternDashNavComponent implements OnInit {
       const config = new MatDialogConfig();
       config.height = '80%';
       config.data = bankDetails;
-      if(window.innerWidth < 800)config.height = '95%';
-      ref = this.dialog.open(BankDetailsFormComponent,config);
+      if (window.innerWidth < 800) config.height = '95%';
+      ref = this.dialog.open(BankDetailsFormComponent, config);
 
       ref.afterClosed().subscribe(result => {
-        console.log(result);
+        // console.log(result);
         if (result.bankAc != this.internDetails.bankName && this.internDetails.bankAc) {
           this._intern.update_intern_bank_details(this.internDetails._id, result).subscribe(res => {
-            console.log(res);
+            // console.log(res);
             this._toast.success(res.message);
           }, err => {
             console.log(err);
@@ -92,6 +91,7 @@ export class InternDashNavComponent implements OnInit {
       this._toast.warning('Bank details not allowed by ADMIN', 'Not Allowed');
     }
   }
+
   logout(): void {
     window.localStorage.clear();
     window.localStorage.setItem('logout', 'ok');

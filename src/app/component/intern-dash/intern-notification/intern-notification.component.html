@@ -14,7 +14,7 @@
                 </div>
             </mat-card-title>
             <mat-card-content>
-                <table *ngIf="pNotification.length > 0; else noPNoti" class="highlight">
+                <table *ngIf="isPublicNoti; else noPNoti" class="highlight">
                     <tbody>
                         <tr *ngFor="let noti of pNotification">
                             <td>{{noti.title}}
@@ -41,8 +41,7 @@
                 </div>
             </mat-card-title>
             <mat-card-content>
-
-                <table *ngIf="internNotification.length > 0; else noInternNoti" class="highlight">
+                <table *ngIf="isPrivateNoti; else noInternNoti" class="highlight">
                     <tbody>
                         <tr *ngFor="let noti of internNotification">
                             <td>{{noti.title}}
@@ -51,7 +50,6 @@
                         </tr>
                     </tbody>
                 </table>
-
                 <ng-template #noInternNoti>
                     <div class="pd-40 center">
                         <h5>No Public Notifications Active</h5>

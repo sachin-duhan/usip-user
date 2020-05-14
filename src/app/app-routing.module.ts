@@ -11,6 +11,7 @@ import { InternProfileComponent } from './component/intern-dash/intern-profile/i
 import { InternSettingsComponent } from './component/intern-dash/intern-settings/intern-settings.component';
 import { InternDashNavComponent } from './component/utility/intern-dash-nav/intern-dash-nav.component';
 import { AuthGuard } from './auth.guard';
+
 const routes: Routes = [
   { path: '', component: IndexComponent },
   { path: 'notification', component: NotificationComponent },

@@ -14,8 +14,8 @@ import { ToastrService } from 'ngx-toastr';
 })
 export class InternProfileComponent implements OnInit {
 
-  constructor(private dialog: MatDialog,
-    private bottomSheet: MatBottomSheet,
+  constructor(
+    private dialog: MatDialog,
     private _intern: InternService,
     private _router: Router,
     private _toast: ToastrService
@@ -58,7 +58,7 @@ export class InternProfileComponent implements OnInit {
     config.disableClose = false;
     config.height = '80%';
     config.width = '40%';
-    if(window.innerWidth < 800)config.width = '80%';
+    if (window.innerWidth < 800) config.width = '80%';
     config.autoFocus = true;
     this.dialog.open(InternPasswordUpdateComponent, config);
   }

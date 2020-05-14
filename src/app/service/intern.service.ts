@@ -75,7 +75,6 @@ export class InternService {
   // get a specific intern : 
   get_specific_intern_by_id(id): Observable<any> {
     const url = this._urlRegister + `/${id}`;
-    console.log(url);
     return this.http.get<any>(url, {
       headers: this.headers
     });

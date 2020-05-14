@@ -39,14 +39,15 @@
                         <h5>Notifications
                             <mat-icon class="right orange-text text-darken-2 fa fa-bell"></mat-icon>
                         </h5>
-                        <div class="pd-0 mg-0" *ngIf="internNoti.length > 0">
+                        <div class="pd-0 mg-0" *ngIf="isPrivateNoti">
                             <ul *ngFor="let noti of internNoti;let i = index">
                                 <li *ngIf="i<2">{{noti.title}} <span class="right grey-text font-20">{{noti.date | date:shortDate}}</span></li>
                             </ul>
-                            <button [routerLink]="['/usip/intern/notification']" class="right mg-20" mat-button>load more</button>
+                            <button [routerLink]="['/usip/intern/notification']" class="right mg-20" mat-button>load
+                                more</button>
                         </div>
-                        <div class="center" *ngIf="internNoti.length < 1">
-                            <h3 class="mat-2">No Notifications found</h3>
+                        <div class="center" *ngIf="!isPrivateNoti">
+                            <h6 class="mat-2 pd-20">No Notifications found</h6>
                         </div>
                     </mat-card>
                 </div>
@@ -57,16 +58,19 @@
                         <h5>Internship Reports
                             <mat-icon class="right red-text fa fa-file-pdf-o text-accent-2"></mat-icon>
                         </h5>
-                        <ul *ngIf="report.length > 0">
+                        <ul *ngIf="isReport">
                             <li *ngFor="let rep of report;let i=index" class="truncate text-truncate pdb-20">
-                                <span>{{i+1}}. </span>{{rep.description}}
-                                <br>
-                                <span class="left grey-text small-font-12">{{rep.start | date:shortDate}} - {{rep.end | date:shortDate}}</span>
-                                <span class="right grey-text small-font-12">{{rep.date | date:shortDate}}</span>
+                                <div *ngIf="i<2">
+                                    <span>{{i+1}}. </span>{{rep.description}}
+                                    <br>
+                                    <span class="left grey-text small-font-12">{{rep.start | date:shortDate}} -
+                                        {{rep.end | date:shortDate}}</span>
+                                    <span class="right grey-text small-font-12">{{rep.date | date:shortDate}}</span>
+                                </div>
                             </li>
                         </ul>
-                        <div *ngIf="report.length <= 0" class="pd-20 center">
-                            <h3 class="mat-h3">No Reports submitted</h3>
+                        <div *ngIf="!isReport" class="pd-20 center">
+                            <h6 class="mat-h3">No Reports submitted</h6>
                         </div>
                     </mat-card>
                 </div>

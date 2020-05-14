@@ -1,6 +1,7 @@
 <div class="row pd-20">
     <app-spinner *ngIf="loading"></app-spinner>
-    <h1 (click)="allowReport()" class="mat-h3 mg-0 pd-10 grey lighten-5">Add Report
+    <h1 (click)="allowReport()" class="mat-h3 mg-0 pd-10 grey lighten-5">
+        Add Report
         <div class="right pointer">
             <mat-icon *ngIf="!addReport" matTooltip="Add Report" matTooltipPsosition="bottom">add</mat-icon>
             <mat-icon *ngIf="addReport">clear</mat-icon>
@@ -10,21 +11,25 @@
         <div class="row">
             <label class="col s12 center input-button">
                 {{input}}
-                    <input type="file" id="input-file" (change)="onFileSelected($event)"
-                     class="pointer pdt-10 pdb-10 col s12" placeholder="Choose a file" required>
+                <input type="file" id="input-file" (change)="onFileSelected($event)"
+                    class="pointer pdt-10 pdb-10 col s12" placeholder="Choose a file" required>
             </label>
 
             <mat-form-field class="col s12 m6 l3">
                 <mat-label>Starting Date</mat-label>
                 <input matInput [matDatepicker]="picker" formControlName="start" placeholder="5/06/2019" required>
-                <button mat-mini-fab type="button" matSuffix class="blue" (click)="picker.open()"><mat-icon>date_range</mat-icon></button>
+                <button mat-mini-fab type="button" matSuffix class="blue" (click)="picker.open()">
+                    <mat-icon>date_range</mat-icon>
+                </button>
                 <mat-datepicker #picker></mat-datepicker>
             </mat-form-field>
 
             <mat-form-field class="col s12 m6 l3">
                 <mat-label>End Date</mat-label>
                 <input placeholder="5/07/2019" matInput [matDatepicker]="picker2" formControlName="end" required>
-                <button mat-mini-fab matSuffix type="button" class="green" (click)="picker2.open()"><mat-icon>date_range</mat-icon></button>
+                <button mat-mini-fab matSuffix type="button" class="green" (click)="picker2.open()">
+                    <mat-icon>date_range</mat-icon>
+                </button>
                 <mat-datepicker #picker2></mat-datepicker>
             </mat-form-field>
 
@@ -43,20 +48,21 @@
                     <div class="card-header">
                         <h6 class="mg-0 pd-0">Report : {{i+1}}
                             <span class="right">
-                            <button mat-icon-button [matMenuTriggerFor]="appMenu">
-                                <mat-icon>more_vert</mat-icon>
-                            </button>
-                            <mat-menu #appMenu="matMenu">
-                                <button (click)="delete(report._id)" mat-menu-item>Delete Report</button>
-                            <button mat-menu-item><a href="{{report.url}}" download>Download Image</a></button>
-                            </mat-menu>
+                                <button mat-icon-button [matMenuTriggerFor]="appMenu">
+                                    <mat-icon>more_vert</mat-icon>
+                                </button>
+                                <mat-menu #appMenu="matMenu">
+                                    <button (click)="delete(report._id)" mat-menu-item>Delete Report</button>
+                                    <button mat-menu-item><a href="{{report.url}}" download>Download Image</a></button>
+                                </mat-menu>
                             </span>
                         </h6>
-                        <h5>Period : {{report.start | date:shortDate}} - {{report.end | date:shortDate}}</h5>
+                        <p class="lead">Period : {{report.start | date:shortDate}} - {{report.end | date:shortDate}}</p>
                     </div>
                     <div class="card-body text-justify grey-text">
                         <p>{{report.description}}</p>
-                        <span class="right grey-text submit-date">Submission Date : {{ report.date | date:fullDate }}</span>
+                        <span class="right grey-text submit-date">Submission Date :
+                            {{ report.date | date:fullDate }}</span>
                     </div>
                 </div>
             </div>

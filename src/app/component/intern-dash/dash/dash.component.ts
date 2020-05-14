@@ -23,8 +23,10 @@ import { ToastrService } from 'ngx-toastr';
 export class InternDashComponent {
 
   public internNoti = [];
-  public publicNoti = [];
   public report = [];
+
+  public isReport: Boolean = false;
+  public isPrivateNoti: Boolean = false;
 
   constructor(public dialog: MatDialog,
     private bottomSheet: MatBottomSheet,
@@ -33,44 +35,15 @@ export class InternDashComponent {
     private router: Router,
     private _intern: InternService,
     private _toast: ToastrService
-  ) {
-    this._notfi.internNotification().subscribe(res => {
-      this.internNoti = res.notifications;
-    }, err => {
-      this._toast.warning('Intern notifiaction not fetched!','Error');
-    });
-
-    this._notfi.publicNotification().subscribe(res => {
-      this.publicNoti = res.notifications;
-    }, err => {
-      // console.log(err);
-      this._toast.warning('Public Notifications not fetched!','Error');
-    });
-
-    this._report.getSpecificReport(jwt_decode(localStorage.getItem('token')).id).subscribe(res => {
-      this.report = res.reports;
-      // console.log(res);
-    }, err => {
-      // console.log(err);
-      this._toast.warning('Reports not fetched!','Error');
-    });
-  }
+  ) { }
 
   public internDetails;
   public officerDetails;
 
   ngOnInit() {
-
     const credentials = jwt_decode(localStorage.getItem('token'));
-
-    // getting the login 
-    this._intern.get_specific_intern_by_id(credentials.id).subscribe(res => {
-      this.internDetails = res.intern;
-      console.log(this.internDetails);
-    }, err => {
-      this._toast.error('You are not unautherised!', 'Contact Admin');
-      this.router.navigateByUrl('/');
-    });
+    this.settingVariables();
+    this._intern.get_specific_intern_by_id(credentials.id).subscribe(res => this.internDetails = res.intern);
   }
 
   openProfile(): void {
@@ -83,19 +56,35 @@ export class InternDashComponent {
       });
     }
   }
+
   openAddReport(): void {
     this.dialog.open(InternReportComponent);
-
   }
+
   openOfficer(): void {
     let officer = this.internDetails.repOfficer;
     this.bottomSheet.open(InternOfficerComponent, {
       data: officer
     });
   }
+
   openTasks(): void {
     this.dialog.open(InternTasksComponent);
   }
 
+  settingVariables() {
+    this._notfi.internNotification().subscribe(res => {
+      if (!res.notifications || res.notifications.length > 0) this.isPrivateNoti = true;
+      this.internNoti = res.notifications;
+    }, err => {
+      this._toast.warning('Notifiaction not fetched!', 'Error');
+    });
 
+    this._report.getSpecificReport(jwt_decode(localStorage.getItem('token')).id).subscribe(res => {
+      if (!res.reports || res.reports.length > 0) this.isReport = true;
+      this.report = res.reports;
+    }, err => {
+      this._toast.warning('Reports not fetched!', 'Error');
+    });
+  }
 }
