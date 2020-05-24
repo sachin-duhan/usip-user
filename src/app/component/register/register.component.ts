@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
-import { Router } from '@angular/router';
 import { RegisterService } from '../../service/register.service';
 import { ToastrService } from 'ngx-toastr';
 
@@ -15,12 +14,11 @@ export class RegisterComponent implements OnInit {
         private fb: FormBuilder,
         private _reg: RegisterService,
         private toast: ToastrService,
-        private router: Router
     ) { }
 
     domains: string[] = [];
     public is_application_allowed: Boolean = false;
-    loading: Boolean = false;   
+    loading: Boolean = false;
 
     registerationForm = this.fb.group({
         name: ['', Validators.minLength(3)],
@@ -30,7 +28,7 @@ export class RegisterComponent implements OnInit {
         email: [''],
         phone: ['', Validators.minLength(10)],
         domain: [''],
-        exp: ['']
+        exp: ['', Validators.minLength(50)]
     });
 
     ngOnInit() {
@@ -40,9 +38,7 @@ export class RegisterComponent implements OnInit {
             this.loading = false;
         });
 
-        this._reg.getDomain().subscribe(res => {
-            this.domains = res.body;
-        });
+        this._reg.getDomain().subscribe(res => this.domains = res.body);
     }
 
     submitForm(): void {
@@ -52,33 +48,17 @@ export class RegisterComponent implements OnInit {
             this.toast.warning('Only 2 domains are allowed', 'Oops!!');
         } else if (rollNo.includes('DTU')) {
             this.toast.warning('DTU not required in Roll number', 'Oops!!');
-        } else if (phone.length != 10) {
+        } else if (phone.length < 10) {
             this.toast.warning('Phone number not valid', 'Oops!!');
         } else {
-            this._reg.postRegisteration(this.registerationForm.value).subscribe(body => {
-                if (body.status === 'ok') {
-                    setTimeout(() => {
-                        this.registerationForm.reset();
-                        this.registerationForm.markAsUntouched();
-                        this.toast.success('Application submitted successfullly', 'Congratulation!')
-                        this.router.navigateByUrl('/');
-                    }, 250);
-                } else if (body.name == 'MongoError') {
-                    this.toast.warning('Phone or Roll number is already registered', 'Check Info!');
-                } else if (body.status == 'Already registered') {
-                    this.toast.error('Intern already Registered', 'Oops!!');
-                } else {
-                    setTimeout(() => {
-                        this.toast.error('something went wrong', 'Oops!');
-                        this.router.navigateByUrl('/');
-                    }, 200);
-                }
-            },
-                err => {
-                    console.log(err);
-                    this.toast.error('something went wrong!!', 'Sorry!');
-                });
+            this._reg.postRegisteration(this.registerationForm.value).subscribe(res => {
+                if (res.success) {
+                    this.toast.success("Applications submitted successfully", "congratulations");
+                    this.registerationForm.reset();
+                    this.registerationForm.clearValidators();
+                } else
+                    this.toast.warning(res.message, 'OOPS');
+            }, err => this.toast.error(err.message, 'OOPS!'));
         }
     }
-
 }

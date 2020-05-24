@@ -1,8 +1,9 @@
 <app-spinner *ngIf="loading"></app-spinner>
 <div class="container row" *ngIf="is_application_allowed && !loading">
     <mat-card class="col center s12 offset-l3 offset-m2 l6 m8 card pd-20 white mat-elevation-z8">
+        <br>
         <mat-card-title>
-            <h4 class="mg-0 pd-10 pdt-20">USIP application form</h4>
+            <h4 class="mg-0 pd-10 pdt-20 grey-text text-darken-2">Internship Application form</h4>
         </mat-card-title>
         <mat-card-content>
             <form class="left-align row pd-20" (submit)="submitForm()" [formGroup]="registerationForm">

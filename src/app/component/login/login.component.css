@@ -21,6 +21,7 @@ mat-form-field mat-icon {
     margin: 0;
     box-shadow: none;
     border-radius: 0;
+    background: transparent;
 }
 
 #shadow {

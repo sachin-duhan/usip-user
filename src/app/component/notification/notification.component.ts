@@ -20,7 +20,6 @@ export class NotificationComponent implements OnInit {
     ngOnInit() {
         this._notificationService.publicNotification().subscribe(
             res => {
-                console.log(res);
                 this.publicNotification = res.body;
                 this.loading != this.loading;
                 this.activePageDataChunk = this.publicNotification.slice(0, this.pageSize);
