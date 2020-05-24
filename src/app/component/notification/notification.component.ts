@@ -1,6 +1,5 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { NotifyService } from '../../service/notify.service';
-import { MatPaginator } from '@angular/material';
 
 @Component({
     selector: 'app-notification',
@@ -13,7 +12,7 @@ export class NotificationComponent implements OnInit {
     public loading: Boolean = false;
     public date = new Date();
 
-    activePageDataChunk = [];
+    activePageDataChunk: Array<any> = [];
     pageSize = 5;
     pageSizeOptions: number[] = [5, 10, 15];
 
@@ -30,6 +29,7 @@ export class NotificationComponent implements OnInit {
             }
         );
     }
+
     setPageSizeOptions(setPageSizeOptionsInput: string) {
         this.pageSizeOptions = setPageSizeOptionsInput.split(',').map(str => +str);
     }

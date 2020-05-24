@@ -1,41 +1,42 @@
 <app-spinner *ngIf="loading"></app-spinner>
-<div class="backgrund-notification">
-    <section>
-        <div class="container center">
-            <div class="row pdt-20">
-                <mat-card style="min-height:620px" class="col shadow-lg s12 m12 l8 offset-l2 white">
-                    <div class="pd-5"></div>
-                    <h4 class="mgb-0 pdb-10">Notifications</h4>
-                    <hr width="100px" color="blue">
-                    <mat-card-content>
-                        <table class="highlight">
-                            <tbody>
-                                <tr *ngFor="let item of activePageDataChunk; let i=index">
-                                    <td id="big_font">
-                                        {{i+1}}. {{item.title}}.
-                                        <br>
-                                        <span class="small-font-12 left pointer"><i
-                                                        class="fa fa-file-pdf-o red-text"></i> <span
-                                                        class="grey-text pdl-10">Download notice</span></span>
-                                        <span class="right grey-text small-font-12"> <span
-                                                        class="black-text">ADMIN</span> | {{item.date | date:shortDate }}</span>
-                                    </td>
-                                </tr>
-                            </tbody>
-                        </table>
-                    </mat-card-content>
-                    <mat-card-footer>
-                        <div class="row bottom" id="notification-footer">
-                            <!-- <div class="right">
-                <button type="button" class="blue white-text darken-3" mat-button><span class="mat-h3">Load
-                    more</span></button>
-              </div> -->
-                            <mat-paginator [length]="publicNotification.length" [pageSize]="pageSize" [pageSizeOptions]="pageSizeOptions" (page)="onPageChanged($event)">
-                            </mat-paginator>
-                        </div>
-                    </mat-card-footer>
-                </mat-card>
-            </div>
+<section>
+    <div class="container center">
+        <div class="row pdt-20">
+            <mat-card style="min-height:620px" class="col shadow-lg s12 m12 l8 offset-l2 white">
+                <div class="pd-5"></div>
+                <h4 class="mgb-0 pdb-10">Notifications</h4>
+                <hr width="100px" color="blue">
+                <mat-card-content>
+                    <div *ngIf="activePageDataChunk.length == 0">
+                        <br><br>
+                        <img src="/assets/empty.png" />
+                        <h5 class="grey-text">No Notification Found</h5>
+                    </div>
+                    <table class="highlight" *ngIf="activePageDataChunk.length > 0">
+                        <tbody>
+                            <tr *ngFor="let item of activePageDataChunk; let i=index">
+                                <td id="big_font">
+                                    {{i+1}}. {{item.title}}.
+                                    <br>
+                                    <span class="small-font-12 left pointer">
+                                        <i class="fa fa-file-pdf-o red-text"></i>
+                                        <span class="grey-text pdl-10">Download notice</span>
+                                    </span>
+                                    <span class="right grey-text small-font-12">
+                                        <span class="black-text">ADMIN</span> | {{item.date | date:shortDate }}
+                                    </span>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </mat-card-content>
+                <mat-card-footer>
+                    <div class="row bottom" id="notification-footer">
+                        <mat-paginator [length]="publicNotification.length" [pageSize]="pageSize" [pageSizeOptions]="pageSizeOptions" (page)="onPageChanged($event)">
+                        </mat-paginator>
+                    </div>
+                </mat-card-footer>
+            </mat-card>
         </div>
-    </section>
-</div>
+    </div>
+</section>
