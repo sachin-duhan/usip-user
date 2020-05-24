@@ -142,6 +142,22 @@ a {
     }
 }
 
+#shadow {
+    box-shadow: 3px 0px 24px rgba(0, 0, 0, 0.3), 1px 0px 80px rgba(0, 0, 0, 0.1);
+}
+
+.shadow {
+    box-shadow: 3px 0px 30px rgba(0, 0, 0, 0.3), 1px 0px 80px rgba(0, 0, 0, 0.1);
+}
+
+::-webkit-scrollbar {
+    width: 6px;
+}
+
+::-webkit-scrollbar-thumb {
+    background: #888;
+}
+
 .push_bottom-right {
     position: absolute;
     bottom: 30px;
@@ -253,13 +269,6 @@ backgrounds!
     background-size: cover;
     background-repeat: no-repeat;
     background-image: url('/assets/background-21.png');
-}
-
-.background-laptop-white {
-    background-position: center;
-    background-size: cover;
-    background-repeat: no-repeat;
-    background-image: url('/assets/white_laptop2.jpg');
 }
 
 .background-buiding-black {

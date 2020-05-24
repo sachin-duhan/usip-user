@@ -1,9 +1,12 @@
-footer .row{
+footer .row {
     margin-bottom: 0;
 }
-footer{
+
+footer {
     min-height: 40vh;
+    background-color: #2a1d43;
 }
-h6{
+
+h6 {
     font-size: 22px;
 }

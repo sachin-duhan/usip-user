@@ -1,36 +1,17 @@
-thead tr td {
-    border-radius: 0px;
-}
-
-.section-heading-main-title h1 {
-    font-size: 110px;
-    font-stretch: expanded;
-    letter-spacing: 7px;
-    font-family: Arial, Helvetica, sans-serif;
-}
-
 .button-container {
     width: 750px;
 }
 
 .back {
-    background: url('../../../assets/home.svg');
+    background: url('/assets/main.png');
     background-size: cover;
     background-repeat: no-repeat;
     background-position: center;
 }
 
-.card .card-body {
-    background: linear-gradient(white, grey, black);
-}
-
-.main-container {
-    padding-top: 10%;
-}
-
 .main-heading h1,
 h2 {
-    font-size: 7rem;
+    font-size: 6rem;
     font-family: Verdana, Geneva, Tahoma, sans-serif;
     font-weight: 350;
     padding: 0;
@@ -54,9 +35,6 @@ h2 {
 }
 
 @media(max-width: 768px) {
-    .main-container {
-        padding-top: 30%;
-    }
     .main-heading h1,
     h2 {
         font-size: 3.5rem;
@@ -72,12 +50,8 @@ h2 {
     }
 }
 
-.message-container h4 {
-    font-size: 3rem;
-    font-weight: 450;
-}
-
-.message-container .message {
-    font-size: 18px;
-    font-weight: 250;
+.border_bottom {
+    position: relative;
+    bottom: -38px;
+    transform: rotateY(180deg);
 }

@@ -5,6 +5,10 @@ nav {
     box-shadow: 1px 0 11px rgba(0, 0, 0, 0.14), 0.6px 0 20px rgba(0, 0, 0, 0.1);
 }
 
+.indigo {
+    color: white;
+}
+
 nav img {
     padding-top: 12px;
 }

@@ -47,6 +47,7 @@ import { AuthGuard } from './auth.guard';
 import { ImprovementsComponent } from './component/intern-dash/improvements/improvements.component';
 import { TasksService } from './service/tasks.service';
 import { RoleGuardService } from './role-guard.service';
+import { HomeComponent } from './component/home/home.component';
 
 @NgModule({
   declarations: [
@@ -69,6 +70,7 @@ import { RoleGuardService } from './role-guard.service';
     InternPasswordUpdateComponent,
     SpinnerComponent,
     ImprovementsComponent,
+    HomeComponent,
   ],
   imports: [
     HttpClientModule,
