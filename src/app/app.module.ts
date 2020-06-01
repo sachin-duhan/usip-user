@@ -37,7 +37,6 @@ import { InternDashComponent } from './component/intern-dash/dash/dash.component
 import { BankDetailsFormComponent } from './component/intern-dash/bank-details-form/bank-details-form.component';
 import { InternNotificationComponent } from './component/intern-dash/intern-notification/intern-notification.component';
 import { InternProfileComponent } from './component/intern-dash/intern-profile/intern-profile.component';
-import { InternOfficerComponent } from './component/intern-dash/intern-officer/intern-officer.component';
 import { InternReportComponent } from './component/intern-dash/intern-report/intern-report.component';
 import { InternTasksComponent } from './component/intern-dash/intern-tasks/intern-tasks.component';
 import { InternSettingsComponent } from './component/intern-dash/intern-settings/intern-settings.component';
@@ -63,7 +62,6 @@ import { HomeComponent } from './component/home/home.component';
     InternDashNavComponent,
     InternNotificationComponent,
     InternProfileComponent,
-    InternOfficerComponent,
     InternReportComponent,
     InternTasksComponent,
     InternSettingsComponent,
@@ -170,7 +168,6 @@ import { HomeComponent } from './component/home/home.component';
     InternPasswordUpdateComponent,
     InternNotificationComponent,
     InternProfileComponent,
-    InternOfficerComponent,
     InternReportComponent,
     InternTasksComponent,
     ImprovementsComponent

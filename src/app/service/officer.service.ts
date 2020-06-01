@@ -8,22 +8,6 @@ import { Observable } from 'rxjs';
 })
 export class OfficerService {
 
-/************************************************
-
-=> Bse URL = '/officer'
-
-* GET      '/' = get all officers
- * POST     '/create' = creating a new officer
-    |_
-      |-> name phone email
-      |-> deptt
-
- * PUT      'add/:id' = assigning an intern to an officer
-    |-> this is also adds the officer to the intern profile as well!
- * DELETE    '/remove/:id' = removing an intern from an officer
-
- ***********************************************/
-
   private _urlOfficer = environment.apiBaseURL + '/officer';
 
   constructor(private http: HttpClient) { }

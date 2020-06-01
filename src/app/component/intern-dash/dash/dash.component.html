@@ -1,6 +1,5 @@
 <div class="center">
-    <div class="pd-20"></div>
-    <h2 class="mg-0 blue-grey-text text-darken-4 margin-small">Welcome to Internship</h2>
+    <h3 class="mg-0 blue-grey-text text-darken-4 margin-small">Welcome to Internship</h3>
     <p class="lead pd-10 mg-0 hide-on-small-and-down" id="p-squeez">Providing experience through Education, Innovation and Hard work for the service of humanity</p>
     <div class="mg-20 pd-20 mgb-0 pdb-0">
         <div class="row">
@@ -20,10 +19,17 @@
             <br class="show-on-small hide-on-med-and-up">
             <br class="show-on-small hide-on-med-and-up">
 
-            <div class="col s6 m6 l3 transparent pd-40 pdb-0 center" (click)="openOfficer()">
+            <div class="col s6 m6 l3 transparent pd-40 pdb-0 center" (click)="isShowingOfficerDetails = !isShowingOfficerDetails">
                 <div class="pd-10 width-250 hoverable center">
-                    <mat-icon class="purple-text text-darken-1 fa-2x fa fa-university pd-0 mg-0"></mat-icon>
-                    <h6 class="pd-10  mg-0">Reporting officer</h6>
+                    <div *ngIf="!isShowingOfficerDetails">
+                        <mat-icon class="purple-text text-darken-1 fa-2x fa fa-university pd-0 mg-0"></mat-icon>
+                        <h6 class="pd-10  mg-0">Show Reporting officer</h6>
+                    </div>
+                    <div *ngIf="isShowingOfficerDetails">
+                        <h5 class="pd-10  mg-0 grey-text">{{officerDetails.name | titlecase}}</h5>
+                        <div>Department - {{officerDetails.deptt}}</div>
+                        <div>Contact - {{officerDetails.phone}}</div>
+                    </div>
                 </div>
             </div>
             <div class="col s6 m6 l3 transparent pd-40 pdb-0 center" (click)="openTasks()">
@@ -36,9 +42,7 @@
             <div class="col m6 s12 height-200">
                 <div class="pd-20 mg-20 pdb-0 mgb-0">
                     <mat-card class="mg-0 left-align">
-                        <h5>Notifications
-                            <mat-icon class="right orange-text text-darken-2 fa fa-bell"></mat-icon>
-                        </h5>
+                        <h5>Notifications <i class="right orange-text text-darken-2 fa fa-bell"></i> </h5>
                         <div class="pd-0 mg-0" *ngIf="isPrivateNoti">
                             <ul *ngFor="let noti of internNoti;let i = index">
                                 <li *ngIf="i<2">{{noti.title}} <span class="right grey-text font-20">{{noti.date | date:shortDate}}</span></li>

@@ -1,10 +1,9 @@
-<div class="row pd-20">
-    <app-spinner *ngIf="loading"></app-spinner>
-    <h1 (click)="allowReport()" class="mat-h3 mg-0 pd-10 grey lighten-5">
+<app-spinner *ngIf="loading"></app-spinner>
+<div class="row pd-20" *ngIf="!loading">
+    <h1 class="mat-h3 mg-0 pd-10 indigo lighten-5">
         Add Report
-        <div class="right pointer">
-            <mat-icon *ngIf="!addReport" matTooltip="Add Report" matTooltipPsosition="bottom">add</mat-icon>
-            <mat-icon *ngIf="addReport">clear</mat-icon>
+        <div class="right pointer" (click)="addReport = !addReport">
+            <mat-icon>{{addReport ? "clear" : "add"}}</mat-icon>
         </div>
     </h1>
     <form class="mg-20 pd-20" *ngIf="addReport" (submit)="submitForm()" [formGroup]="addForm">
@@ -14,7 +13,6 @@
                 <input type="file" id="input-file" (change)="onFileSelected($event)"
                     class="pointer pdt-10 pdb-10 col s12" placeholder="Choose a file" required>
             </label>
-
             <mat-form-field class="col s12 m6 l3">
                 <mat-label>Starting Date</mat-label>
                 <input matInput [matDatepicker]="picker" formControlName="start" placeholder="5/06/2019" required>
@@ -23,7 +21,6 @@
                 </button>
                 <mat-datepicker #picker></mat-datepicker>
             </mat-form-field>
-
             <mat-form-field class="col s12 m6 l3">
                 <mat-label>End Date</mat-label>
                 <input placeholder="5/07/2019" matInput [matDatepicker]="picker2" formControlName="end" required>
@@ -32,11 +29,10 @@
                 </button>
                 <mat-datepicker #picker2></mat-datepicker>
             </mat-form-field>
-
             <mat-form-field class="col s12">
                 <mat-label>Summary</mat-label>
                 <input type="text" matInput formControlName="summary" placeholder="Work and conduct report" required>
-                <mat-hint class="right">Minimum 50 words</mat-hint>
+                <mat-hint class="right indigo-text">Minimum 50 words</mat-hint>
             </mat-form-field>
             <button mat-button type="submit" [disabled]="!addForm.valid" class="red white-text right">Submit</button>
         </div>
@@ -53,11 +49,13 @@
                                 </button>
                                 <mat-menu #appMenu="matMenu">
                                     <button (click)="delete(report._id)" mat-menu-item>Delete Report</button>
-                                    <button mat-menu-item><a href="{{report.url}}" download>Download Image</a></button>
+                                    <button mat-menu-item><a href="{{report.url}}" download>Download
+                                            Image</a></button>
                                 </mat-menu>
                             </span>
                         </h6>
-                        <p class="lead">Period : {{report.start | date:shortDate}} - {{report.end | date:shortDate}}</p>
+                        <p class="lead">Period : {{report.start | date:shortDate}} - {{report.end | date:shortDate}}
+                        </p>
                     </div>
                     <div class="card-body text-justify grey-text">
                         <p>{{report.description}}</p>
@@ -67,8 +65,11 @@
                 </div>
             </div>
         </div>
-        <ng-template class="row center pd-40" #noData>
-            <h5>No Reports Found!</h5>
+        <ng-template #noData>
+            <div class="center">
+                <img src="/assets/empty.png" alt="no data found" class="responsive-img">
+                <h6>No Reports Found!</h6>
+            </div>
         </ng-template>
     </div>
 </div>

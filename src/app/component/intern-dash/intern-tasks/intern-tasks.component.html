@@ -1,33 +1,37 @@
 <h1 class="mat-h1 pd-20 grey lighten-5">Internship tasks
-    <button mat-icon-button class="right">
-    <mat-icon *ngIf="!addTask" matTooltip="Add task alloted" matTooltipPosition="below">edit</mat-icon>
-    <mat-icon *ngIf="addTask">clear</mat-icon>
-  </button>
+    <button mat-icon-button (click)="addTask = !addTask" class="right">
+        <mat-icon>{{ addTask ? "clear" : "edit"}}</mat-icon>
+    </button>
 </h1>
-<form [formGroup]="addForm" (submit)="submitForm()" class="back">
-    <div *ngIf="addTask" class="row">
-        <mat-form-field class="col s10">
-            <mat-label>Task Alloted</mat-label>
-            <input matInput formControlName="title" type="text" placeholder="Development of USIP web app" required>
-            <mat-icon matPrefix class="green-text">work</mat-icon>
-        </mat-form-field>
-        <br>
-        <button [disabled]="!addForm.valid" type="submit" mat-raised-button class="blue darken-1 white-text">Add Task</button>
-    </div>
-    <div class="border">
-        <div *ngIf="tasks.length >0" class="pd-0 mg-0 row center grey-text text-lighten-1">Tasks Registered</div>
-        <table *ngIf="tasks.length > 0; else noData" class="highlight">
-            <tbody>
-                <tr *ngFor="let task of tasks; let i = index">
-                    <td *ngIf="i<3">{{task.title}}</td>
-                    <td *ngIf="i<3" class="right small-text">{{task.date}}</td>
-                </tr>
-            </tbody>
-        </table>
-    </div>
+
+<form *ngIf="addTask" [formGroup]="addForm" (submit)="submitForm()" class="row">
+    <mat-form-field class="col s12">
+        <mat-label>Task Alloted</mat-label>
+        <input matInput formControlName="title" type="text">
+    </mat-form-field>
+    <mat-form-field class="col s12">
+        <mat-label>Description</mat-label>
+        <input matInput formControlName="description" type="text">
+    </mat-form-field>
+    <button [disabled]="!addForm.valid" type="submit" mat-raised-button class="indigo right white-text">
+        Add Task</button>
+</form>
+
+<div *ngIf="!addTask">
+    <div *ngIf=" tasks && tasks.length >0" class="pd-0 mg-0 row center grey-text text-lighten-1">Tasks Registered</div>
+    <table *ngIf="tasks && tasks.length > 0; else noData" class="highlight">
+        <tbody>
+            <tr *ngFor="let task of tasks; let i = index">
+                <td>{{task.title}}</td>
+                <td class="right small-text">{{task.date}}</td>
+            </tr>
+        </tbody>
+    </table>
+
     <ng-template #noData>
-        <div class="pd-40 center">
+        <div class="center">
+            <img src="/assets/empty.png" class="responsive-img">
             <h5>No task being added</h5>
         </div>
     </ng-template>
-</form>
+</div>
