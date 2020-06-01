@@ -47,6 +47,7 @@ import { ImprovementsComponent } from './component/intern-dash/improvements/impr
 import { TasksService } from './service/tasks.service';
 import { RoleGuardService } from './role-guard.service';
 import { HomeComponent } from './component/home/home.component';
+import { NoDataComponent } from './component/utility/no-data/no-data.component';
 
 @NgModule({
   declarations: [
@@ -69,6 +70,7 @@ import { HomeComponent } from './component/home/home.component';
     SpinnerComponent,
     ImprovementsComponent,
     HomeComponent,
+    NoDataComponent,
   ],
   imports: [
     HttpClientModule,

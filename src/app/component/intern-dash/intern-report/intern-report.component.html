@@ -1,11 +1,15 @@
 <app-spinner *ngIf="loading"></app-spinner>
 <div class="row pd-20" *ngIf="!loading">
-    <h1 class="mat-h3 mg-0 pd-10 indigo lighten-5">
-        Add Report
-        <div class="right pointer" (click)="addReport = !addReport">
-            <mat-icon>{{addReport ? "clear" : "add"}}</mat-icon>
+    <!--header area-->
+    <h1 class="mat-h3 mg-0 pd-10 indigo lighten-5 valign-wrapper row">
+        <span class="col s10"> Add Report</span>
+        <div class="col s2">
+            <button mat-icon-button class="right" (click)="addReport = !addReport">
+                <mat-icon>{{addReport ? "clear" : "add"}}</mat-icon>
+            </button>
         </div>
     </h1>
+    <!--form here-->
     <form class="mg-20 pd-20" *ngIf="addReport" (submit)="submitForm()" [formGroup]="addForm">
         <div class="row">
             <label class="col s12 center input-button">
@@ -37,8 +41,10 @@
             <button mat-button type="submit" [disabled]="!addForm.valid" class="red white-text right">Submit</button>
         </div>
     </form>
+
+    <!--displau of the content here-->
     <div class="pd-20" *ngIf="!addReport">
-        <div class="row" *ngIf="reports.length > 0; else noData">
+        <div class="row" *ngIf="reports.length > 0">
             <div class="col s12 m6 pdb-30" *ngFor="let report of reports;let i=index" id="{{report._id}}">
                 <div class="card report-card">
                     <div class="card-header">
@@ -65,11 +71,6 @@
                 </div>
             </div>
         </div>
-        <ng-template #noData>
-            <div class="center">
-                <img src="/assets/empty.png" alt="no data found" class="responsive-img">
-                <h6>No Reports Found!</h6>
-            </div>
-        </ng-template>
+        <app-no-data *ngIf="reports.length == 0" [text]="'No Reports Found'"></app-no-data>
     </div>
 </div>

@@ -19,7 +19,7 @@
 
 <div *ngIf="!addTask">
     <div *ngIf=" tasks && tasks.length >0" class="pd-0 mg-0 row center grey-text text-lighten-1">Tasks Registered</div>
-    <table *ngIf="tasks && tasks.length > 0; else noData" class="highlight">
+    <table *ngIf="tasks && tasks.length > 0" class="highlight">
         <tbody>
             <tr *ngFor="let task of tasks; let i = index">
                 <td>{{task.title}}</td>
@@ -27,11 +27,5 @@
             </tr>
         </tbody>
     </table>
-
-    <ng-template #noData>
-        <div class="center">
-            <img src="/assets/empty.png" class="responsive-img">
-            <h5>No task being added</h5>
-        </div>
-    </ng-template>
+    <app-no-data *ngIf="!tasks || tasks.length == 0" [text]="'No task added'"></app-no-data>
 </div>

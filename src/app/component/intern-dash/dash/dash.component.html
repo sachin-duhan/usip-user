@@ -50,9 +50,8 @@
                             <button [routerLink]="['/usip/intern/notification']" class="right mg-20" mat-button>load
                                 more</button>
                         </div>
-                        <div class="center" *ngIf="!isPrivateNoti">
-                            <h6 class="mat-2 pd-20">No Notifications found</h6>
-                        </div>
+                        <app-no-data *ngIf="!isPrivateNoti" [text]="'No notification found'" [image]="false">
+                        </app-no-data>
                     </mat-card>
                 </div>
             </div>
@@ -73,9 +72,7 @@
                                 </div>
                             </li>
                         </ul>
-                        <div *ngIf="!isReport" class="pd-20 center">
-                            <h6 class="mat-h3">No Reports submitted</h6>
-                        </div>
+                        <app-no-data *ngIf="!isReport" [image]="false" [text]="'No Reports submitted'"> </app-no-data>
                     </mat-card>
                 </div>
             </div>
