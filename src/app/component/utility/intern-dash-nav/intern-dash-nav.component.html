@@ -2,26 +2,26 @@
     <mat-sidenav #drawer class="sidenav dark-blue" fixedInViewport="true" [attr.role]="(isHandset$ | async) ? 'dialog' : 'navigation'" [mode]="(isHandset$ | async) ? 'over' : 'side'" [opened]="!(isHandset$ | async)">
         <mat-nav-list>
             <div mat-list-item class="pdl-10">
-                <button mat-icon-button routerLink="/usip/intern">
-                    <mat-icon class="white-text" id="hover-circle">home</mat-icon>
+                <button mat-icon-button class="white-text" routerLink="/usip/intern" routerLinkActive="red-text">
+                    <mat-icon>home</mat-icon>
                 </button>
             </div>
             <div mat-list-item class="pdl-10">
-                <button mat-icon-button matTooltip="View Profile" matTooltipPosition="right" routerLink="/usip/intern/profile">
-                    <mat-icon class="white-text" id="hover-circle">account_circle</mat-icon>
+                <button mat-icon-button class="white-text" matTooltip="View Profile" matTooltipPosition="right" routerLink="/usip/intern/profile">
+                    <mat-icon>account_circle</mat-icon>
                 </button></div>
             <div mat-list-item class="pdl-10">
-                <button mat-icon-button routerLink="/usip/intern/notification" matTooltip="Notifications available" matTooltipClass="matTooltip" matTooltipPosition="right">
-                    <mat-icon class="white-text" id="hover-circle">notifications_active</mat-icon>
+                <button mat-icon-button class="white-text" routerLink="/usip/intern/notification" matTooltip="Notifications available" matTooltipClass="matTooltip" matTooltipPosition="right">
+                    <mat-icon>notifications_active</mat-icon>
                 </button>
             </div>
         </mat-nav-list>
         <mat-nav-list class="push_bottom">
-            <div mat-list-item class="pdl-10"><button mat-icon-button matTooltip="Reports submitted" matTooltipPosition="right" routerLink="/usip/intern/settings">
-                    <mat-icon class="white-text" id="hover-circle">insert_chart</mat-icon>
+            <div mat-list-item class="pdl-10"><button mat-icon-button class="white-text" matTooltip="Reports submitted" matTooltipPosition="right" routerLink="/usip/intern/settings">
+                    <mat-icon>insert_chart</mat-icon>
                 </button></div>
-            <div (click)="logout()" mat-list-item class="pdl-10"><button mat-icon-button matTooltip="Logout" matTooltipPosition="right">
-                    <mat-icon class="white-text" id="hover-circle">lock</mat-icon>
+            <div (click)="logout()" mat-list-item class="pdl-10"><button mat-icon-button class="white-text" matTooltip="Logout" matTooltipPosition="right">
+                    <mat-icon>lock</mat-icon>
                 </button></div>
         </mat-nav-list>
     </mat-sidenav>

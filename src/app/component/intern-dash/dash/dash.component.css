@@ -100,3 +100,9 @@ mat-card {
 .font-20 {
     font-size: 12px;
 }
+
+.move-top-right {
+    position: absolute;
+    top: -20px;
+    right: -20px;
+}

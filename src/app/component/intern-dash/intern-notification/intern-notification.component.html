@@ -2,10 +2,8 @@
     <div class="col m6 s12">
         <mat-card class="mg-10 height-500">
             <mat-card-title class="mat-h2">
-                Public
-                <div class="right">
-                    <mat-icon class="green-text text-darken01">people</mat-icon>
-                </div>
+                Public Notifications
+                <mat-icon class="indigo-text right">people</mat-icon>
             </mat-card-title>
             <mat-card-content>
                 <table *ngIf="isPublicNoti" class="highlight">
@@ -17,7 +15,7 @@
                         </tr>
                     </tbody>
                 </table>
-                <app-no-data *ngIf="!isPublicNoti" [text]="'No Intern Notifications found'" #noPNoti></app-no-data>
+                <app-no-data *ngIf="!isPublicNoti" [text]="'No Public Notifications found'" #noPNoti></app-no-data>
             </mat-card-content>
         </mat-card>
     </div>
@@ -25,10 +23,8 @@
         <br class="hide-on-med-and-up">
         <mat-card class="mg-10 height-500">
             <mat-card-title class="mat-h2">
-                Intern
-                <div class="right">
-                    <mat-icon class="blue-text text-accent-2">person</mat-icon>
-                </div>
+                Intern Notifications
+                <mat-icon class="indigo-text right">person</mat-icon>
             </mat-card-title>
             <mat-card-content>
                 <table *ngIf="isPrivateNoti" class="highlight">
@@ -40,7 +36,7 @@
                         </tr>
                     </tbody>
                 </table>
-                <app-no-data [text]="'No Public Notifications found'" *ngIf="!isPrivateNoti"></app-no-data>
+                <app-no-data [text]="'No Intern Notifications found'" *ngIf="!isPrivateNoti"></app-no-data>
             </mat-card-content>
         </mat-card>
     </div>
