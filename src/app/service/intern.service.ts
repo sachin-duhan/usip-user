@@ -66,7 +66,6 @@ export class InternService {
   }
 
   update_intern_bank_details(id, data): Observable<any> {
-    console.log(data);
     return this.http.put<any>(this._urlRegister + '/' + id, data, {
       headers: this.headers
     });

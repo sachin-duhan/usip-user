@@ -39,7 +39,7 @@ export class InternDashNavComponent implements OnInit {
 
         this._intern.get_specific_intern_by_id(credentials.id).subscribe(res => {
             this.name = res.pInfo.name;
-            this.internDetails = res.intern;
+            this.internDetails = res;
         }, err => {
             setTimeout(() => {
                 this._toast.error('You are not unautherised!', 'Contact Admin');
@@ -70,19 +70,14 @@ export class InternDashNavComponent implements OnInit {
             ref = this.dialog.open(BankDetailsFormComponent, config);
 
             ref.afterClosed().subscribe(result => {
-                // console.log(result);
                 if (result.bankAc != this.internDetails.bankName && this.internDetails.bankAc) {
-                    this._intern.update_intern_bank_details(this.internDetails._id, result).subscribe(res => {
-                        // console.log(res);
-                        this._toast.success(res.message);
-                    }, err => {
-                        console.log(err);
-                        this._toast.error(err.error.message, 'Faliure');
-                    });
+                    this._intern.update_intern_bank_details(this.internDetails._id, result)
+                        .subscribe(res => this._toast.success(res.message),
+                            err => this._toast.error(err.error.message, 'Faliure'));
                 }
             });
         } else {
-            this._toast.warning('Bank details not allowed by ADMIN', 'Not Allowed');
+            this._toast.warning('Bank details update are not allowed by ADMIN', 'OOPS...');
         }
     }
 
