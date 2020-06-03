@@ -3,13 +3,13 @@
     <p class="lead pd-10 mg-0 hide-on-small-and-down" id="p-squeez">Providing experience through Education, Innovation and Hard work for the service of humanity</p>
     <div class="mg-20 pd-20 mgb-0 pdb-0">
         <div class="row">
-            <div class="col s6 m6 l3 transparent pd-40 pdb-0 center pointer" routerLink="/usip/intern/profile">
+            <div class="col s12 m6 l3 transparent pd-40 pdb-0 center pointer" routerLink="/usip/intern/profile">
                 <div class="pd-10 width-250 hoverable center">
                     <mat-icon class="blue-text text-accent-2 fa-2x fa fa-user-circle pd-0 mg-0"></mat-icon>
                     <h6 class="pd-10 mg-0">View Profile</h6>
                 </div>
             </div>
-            <div class="col s6 m6 l3 transparent pd-40 pdb-0 center" (click)="openAddReport()">
+            <div class="col s12 m6 l3 transparent pd-40 pdb-0 center" (click)="openAddReport()">
                 <div class="pd-10 width-250 hoverable center">
                     <mat-icon class="red-text text-accent-2 fa-2x fa fa-file-pdf-o pd-0 mg-0"></mat-icon>
                     <h6 class="pd-10 mg-0">Add Report</h6>
@@ -19,7 +19,7 @@
             <br class="show-on-small hide-on-med-and-up">
             <br class="show-on-small hide-on-med-and-up">
 
-            <div class="col s6 m6 l3 transparent pd-40 pdb-0 center">
+            <div class="col s12 m6 l3 transparent pd-40 pdb-0 center">
                 <div class="pd-10 width-250 hoverable center" (click)="isShowingOfficerDetails = !isShowingOfficerDetails">
                     <div *ngIf="!isShowingOfficerDetails">
                         <mat-icon class="purple-text text-darken-1 fa-2x fa fa-university pd-0 mg-0"></mat-icon>
@@ -32,7 +32,7 @@
                     </div>
                 </div>
             </div>
-            <div class="col s6 m6 l3 transparent pd-40 pdb-0 center" (click)="openTasks()">
+            <div class="col s12 m6 l3 transparent pd-40 pdb-0 center" (click)="openTasks()">
                 <div class="pd-10 width-250 hoverable center">
                     <mat-icon class="teal-text text-darken-1 fa-2x pd-0 mg-0">work</mat-icon>
                     <h6 class="pd-10 mg-0">Tasks Completed</h6>
@@ -47,8 +47,8 @@
                             <ul *ngFor="let noti of internNoti;let i = index">
                                 <li *ngIf="i<2">{{noti.title}} <span class="right grey-text font-20">{{noti.date | date:shortDate}}</span></li>
                             </ul>
-                            <button [routerLink]="['/usip/intern/notification']" class="right mg-20" mat-button>load
-                                more</button>
+                            <button [routerLink]="['/usip/intern/notification']" class="right mg-20" mat-button>
+                                load more</button>
                         </div>
                         <app-no-data *ngIf="!isPrivateNoti" [text]="'No notification found'" [image]="false">
                         </app-no-data>

@@ -64,9 +64,7 @@ export class InternDashNavComponent implements OnInit {
         if (this.open) {
             let ref;
             const config = new MatDialogConfig();
-            config.height = '80%';
             config.data = bankDetails;
-            if (window.innerWidth < 800) config.height = '95%';
             ref = this.dialog.open(BankDetailsFormComponent, config);
 
             ref.afterClosed().subscribe(result => {

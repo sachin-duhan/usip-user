@@ -16,7 +16,7 @@ export class InternReportComponent implements OnInit {
     public addReport: boolean = false;
 
     loading: Boolean = false;
-    public reports = [];
+    public reports: Array<any> = [];
 
     addForm = this.fb.group({
         start: [''],
@@ -25,25 +25,16 @@ export class InternReportComponent implements OnInit {
     })
 
     ngOnInit() {
-        this._report.get_all_intern_report(jwt_decode(localStorage.getItem('token')).id).subscribe(res => {
-            console.log(res);
-            this.reports = res.reports;
-            this.addURL(this.reports);
-        }, err => {
-            this._toast.error(err.error.message, 'reports not loaded');
-        })
+        this._report.get_all_intern_report(jwt_decode(localStorage.getItem('token')).id)
+            .subscribe(res => this.reports = res.body);
     }
-    fileData: File = null;//this contain the file details for the report!!
+
+    fileData: File = null; //this contain the file details for the report!!
     input: string = "Choose a File";
+
     onFileSelected(event) {
         this.fileData = <File>event.target.files[0];
         this.input = this.fileData.name;
-    }
-
-    addURL(data: any): void {
-        data.map(el => {
-            el.url = environment.apiBaseURL + '/public/' + el.reportImage;
-        })
     }
 
     submitForm(): void {
@@ -53,28 +44,30 @@ export class InternReportComponent implements OnInit {
             const id = jwt_decode(localStorage.getItem('token')).id;
             let formData = new FormData();
             this.loading = !this.loading;
-            formData.append('reportImage', this.fileData, this.fileData.name);
+            formData.append('image', this.fileData, this.fileData.name);
             formData.append('start', this.addForm.get('start').value);
             formData.append('end', this.addForm.get('end').value);
             formData.append('description', this.addForm.get('summary').value);
             this._report.add_report_using_intern_id(id, formData).subscribe(res => {
-                console.log(res);
                 this.addForm.reset();
                 this.addReport = !this.addReport;
                 this.loading = !this.loading;
-                this._toast.success(res.message, 'Done');
+                console.log(res);
+                if (res.success)
+                    this._toast.success(res.message, 'Done');
+                else this._toast.warning(res.message, "OOPS");
             }, err => {
-                console.log(err);
                 this.loading = !this.loading;
-                this._toast.error('report not uploaded', 'Error');
+                console.log(err);
+                this._toast.error(err.message, 'Error');
             });
         }
     }
 
-    delete(id): void {
+    delete(id, index: number): void {
         this._report.deleteReport(id).subscribe(res => {
             this._toast.success(res.message, 'Done');
-            document.getElementById(id).style.setProperty('display', 'none');
-        }, err => this._toast.error(err.message, 'Falied'));
+            this.reports.splice(index, 1);
+        }, err => this._toast.error(err.message, 'OOPS...'));
     }
 }

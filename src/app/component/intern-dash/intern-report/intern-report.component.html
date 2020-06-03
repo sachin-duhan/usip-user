@@ -1,7 +1,7 @@
 <app-spinner *ngIf="loading"></app-spinner>
 <div class="row pd-20" *ngIf="!loading">
     <!--header area-->
-    <h1 class="mat-h3 mg-0 pd-10 indigo lighten-5 valign-wrapper row">
+    <h1 class="mat-h3 mg-0 pd-10 grey lighten-5 valign-wrapper row">
         <span class="col s10"> Add Report</span>
         <div class="col s2">
             <button mat-icon-button class="right" (click)="addReport = !addReport">
@@ -48,25 +48,26 @@
             <div class="col s12 m6 pdb-30" *ngFor="let report of reports;let i=index" id="{{report._id}}">
                 <div class="card report-card">
                     <div class="card-header">
-                        <h6 class="mg-0 pd-0">Report : {{i+1}}
-                            <span class="right">
-                                <button mat-icon-button [matMenuTriggerFor]="appMenu">
-                                    <mat-icon>more_vert</mat-icon>
+                        <h6 class="mg-0 pd-0">
+                            <strong>Report : {{i+1}}</strong>
+                            <button mat-icon-button class="right" [matMenuTriggerFor]="appMenu">
+                                <mat-icon>more_vert</mat-icon>
+                            </button>
+                            <mat-menu #appMenu="matMenu">
+                                <button mat-menu-item>
+                                    <a href="{{report.reportImage}}" target="_blank">Download Report</a>
                                 </button>
-                                <mat-menu #appMenu="matMenu">
-                                    <button (click)="delete(report._id)" mat-menu-item>Delete Report</button>
-                                    <button mat-menu-item><a href="{{report.url}}" download>Download
-                                            Image</a></button>
-                                </mat-menu>
-                            </span>
+                                <button (click)="delete(report._id,i)" mat-menu-item>Delete Report</button>
+                            </mat-menu>
                         </h6>
+                        <!-- <img src="{{report.reportImage}}" class="responsive-img"> -->
                         <p class="lead">Period : {{report.start | date:shortDate}} - {{report.end | date:shortDate}}
                         </p>
                     </div>
                     <div class="card-body text-justify grey-text">
                         <p>{{report.description}}</p>
-                        <span class="right grey-text submit-date">Submission Date :
-                            {{ report.date | date:fullDate }}</span>
+                        <span class="right grey-text submit-date">
+                            Submission Date : {{ report.date | date:fullDate }}</span>
                     </div>
                 </div>
             </div>
