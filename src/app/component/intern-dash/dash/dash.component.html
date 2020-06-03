@@ -57,14 +57,14 @@
             </div>
             <div class="col m6 s12 height-200">
                 <div class="pd-20 mg-20 pdb-0 mgb-0">
-                    <mat-card class="mg-0 left-align">
-                        <h5>Internship Reports
+                    <mat-card class="mg-0" [routerLink]="['/usip/intern/settings']" class="pointer">
+                        <h5 class="left-align">Internship Reports
                             <mat-icon class="right red-text fa fa-file-pdf-o text-accent-2"></mat-icon>
                         </h5>
                         <ul *ngIf="isReport">
                             <li *ngFor="let rep of report;let i=index" class="truncate text-truncate pdb-20">
                                 <div *ngIf="i<2">
-                                    <span>{{i+1}}. </span>{{rep.description}}
+                                    <strong>{{i+1}}. </strong>{{rep.description}}
                                     <br>
                                     <span class="left grey-text small-font-12">{{rep.start | date:shortDate}} -
                                         {{rep.end | date:shortDate}}</span>

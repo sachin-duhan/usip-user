@@ -54,13 +54,14 @@ export class InternDashComponent {
 
     settingVariables() {
         this._notfi.internNotification().subscribe(res => {
-            if (!res.body || res.body > 0) this.isPrivateNoti = true;
+            if (res.success && Array.isArray(res.body) && res.body.length > 0) this.isPrivateNoti = true;
             this.internNoti = res.body;
         });
 
-        this._report.getSpecificReport(jwt_decode(localStorage.getItem('token')).id).subscribe(res => {
-            if (!res.body || res.body.length > 0) this.isReport = true;
-            this.report = res.body;
-        });
+        this._report.get_all_intern_report(jwt_decode(localStorage.getItem('token')).id)
+            .subscribe(res => {
+                if (res.success && Array.isArray(res.body) && res.body.length > 0) this.isReport = true;
+                this.report = res.body;
+            });
     }
 }
