@@ -18,12 +18,11 @@
 </form>
 
 <div *ngIf="!addTask">
-    <div *ngIf=" tasks && tasks.length >0" class="pd-0 mg-0 row center grey-text text-lighten-1">Tasks Registered</div>
     <table *ngIf="tasks && tasks.length > 0" class="highlight">
         <tbody>
             <tr *ngFor="let task of tasks; let i = index">
                 <td>{{task.title}}</td>
-                <td class="right small-text">{{task.date}}</td>
+                <td class="right small-text">{{task.date | date:shortDate}}</td>
             </tr>
         </tbody>
     </table>
