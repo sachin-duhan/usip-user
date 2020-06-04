@@ -42,7 +42,16 @@ export class InternTasksComponent implements OnInit {
         }, err => this._toast.error(err.message, "Ooops"))
     }
 
-    mark_complete(id:string){
-        
+    mark_complete(task) {
+        const req_body = { is_completed: !task.is_completed, visible_to_intern: true };
+        this._task.update_task_status(task._id, req_body).subscribe(
+            res => {
+                if (res.success) {
+                    this._toast.success(res.message, "Done");
+                    task.is_completed = !task.is_completed
+                } else this._toast.warning(res.message, "OOPS")
+            }, err => this._toast.error(err.message, "Error")
+        )
     }
+
 }

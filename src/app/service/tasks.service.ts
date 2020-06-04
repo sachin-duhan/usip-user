@@ -29,6 +29,12 @@ export class TasksService {
         });
     }
 
+    update_task_status(id, body): Observable<any> {
+        return this.http.put(this._url + '/update/' + id, body, {
+            headers: this.headers
+        });
+    }
+
     add_new_task(data): Observable<any> {
         return this.http.post(this._url + '/create', data, {
             headers: this.headers

@@ -22,16 +22,23 @@
     <br>
     <mat-accordion *ngIf="tasks.length > 0" class="row">
         <mat-expansion-panel *ngFor="let item of tasks" class="col s12">
+
             <mat-expansion-panel-header>
                 <mat-panel-title>
                     {{item.title}}
                 </mat-panel-title>
+                <mat-panel-description>
+                    <strong>Status :</strong> {{item.is_completed ? "Completed" : "TODO"}}
+                </mat-panel-description>
             </mat-expansion-panel-header>
+
             <p>{{item.description}}</p>
             <div class="left valign-wrapper">
-                <mat-icon>access_time</mat-icon> <span style="padding-left: 20px;">{{item.date | date:shortDate}}</span>
+                <mat-icon>access_time</mat-icon> <span style="padding-left: 20px;">Assigned on -
+                    {{item.date | date:shortDate}}</span>
             </div>
-            <button mat-button class="right blue-grey darken-4 white-text">Mark Task Completed</button>
+            <button mat-button (click)="mark_complete(item)" class="right blue-grey darken-4 white-text">
+                {{ item.is_completed ? "Mark Under progress" : "Mark Task Completed"}}</button>
         </mat-expansion-panel>
     </mat-accordion>
     <app-no-data *ngIf="!tasks || tasks.length == 0" [text]="'No task added'"></app-no-data>
