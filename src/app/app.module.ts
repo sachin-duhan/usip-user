@@ -171,7 +171,6 @@ import { NoDataComponent } from './component/utility/no-data/no-data.component';
     InternNotificationComponent,
     InternProfileComponent,
     InternReportComponent,
-    InternTasksComponent,
     ImprovementsComponent
   ]
 })

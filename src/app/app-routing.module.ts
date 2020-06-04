@@ -10,6 +10,7 @@ import { InternNotificationComponent } from './component/intern-dash/intern-noti
 import { InternProfileComponent } from './component/intern-dash/intern-profile/intern-profile.component';
 import { InternSettingsComponent } from './component/intern-dash/intern-settings/intern-settings.component';
 import { InternDashNavComponent } from './component/utility/intern-dash-nav/intern-dash-nav.component';
+import { InternTasksComponent } from "./component/intern-dash/intern-tasks/intern-tasks.component";
 import { HomeComponent } from "./component/home/home.component";
 import { AuthGuard } from './auth.guard';
 
@@ -28,6 +29,7 @@ const routes: Routes = [
         path: 'usip', component: InternDashNavComponent,
         children: [
             { canActivate: [AuthGuard], path: 'intern', component: InternDashComponent },
+            { canActivate: [AuthGuard], path: 'intern/tasks', component: InternTasksComponent },
             { canActivate: [AuthGuard], path: 'intern/notification', component: InternNotificationComponent },
             { canActivate: [AuthGuard], path: 'intern/profile', component: InternProfileComponent },
             { canActivate: [AuthGuard], path: 'intern/settings', component: InternSettingsComponent },

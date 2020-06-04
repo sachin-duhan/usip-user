@@ -1,8 +1,9 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
 import { TasksService } from '../../../service/tasks.service';
 import * as jwt_decode from 'jwt-decode';
 import { ToastrService } from 'ngx-toastr';
+import { MatAccordion } from '@angular/material';
 
 @Component({
     selector: 'app-intern-tasks',
@@ -37,7 +38,11 @@ export class InternTasksComponent implements OnInit {
         const task = { ...this.addForm.value, pInfo: credentials.id };
         this._task.add_new_task(task).subscribe(res => {
             this._toast.success(res.message, 'Done');
-            console.log(res);
-        }, err => { this._toast.error(err.message, "Ooops"); console.log(err) })
+            this.tasks.push(res.body);
+        }, err => this._toast.error(err.message, "Ooops"))
+    }
+
+    mark_complete(id:string){
+        
     }
 }

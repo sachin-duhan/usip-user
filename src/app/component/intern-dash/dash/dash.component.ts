@@ -48,10 +48,7 @@ export class InternDashComponent {
     openProfile() {
         this.dialog.open(InternProfileComponent);
     }
-
     openAddReport() { this.dialog.open(InternReportComponent) }
-    openTasks() { this.dialog.open(InternTasksComponent) }
-
     settingVariables() {
         this._notfi.internNotification().subscribe(res => {
             if (res.success && Array.isArray(res.body) && res.body.length > 0) this.isPrivateNoti = true;

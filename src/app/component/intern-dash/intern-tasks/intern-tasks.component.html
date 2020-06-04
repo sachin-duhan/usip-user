@@ -1,30 +1,38 @@
-<h1 class="mat-h1 pd-20 grey lighten-5">Internship tasks
-    <button mat-icon-button (click)="addTask = !addTask" class="right">
-        <mat-icon>{{ addTask ? "clear" : "edit"}}</mat-icon>
-    </button>
-</h1>
+<div class="conatiner pd-20">
+    <h1 class="mat-h1 pd-20 grey lighten-5">Internship tasks
+        <button mat-icon-button (click)="addTask = !addTask" class="right">
+            <mat-icon>{{ addTask ? "clear" : "edit"}}</mat-icon>
+        </button>
+    </h1>
 
-<form *ngIf="addTask" [formGroup]="addForm" (submit)="submitForm()" class="row">
-    <mat-form-field class="col s12">
-        <mat-label>Task Alloted</mat-label>
-        <input matInput formControlName="title" type="text">
-    </mat-form-field>
-    <mat-form-field class="col s12">
-        <mat-label>Description</mat-label>
-        <input matInput formControlName="description" type="text">
-    </mat-form-field>
-    <button [disabled]="!addForm.valid" type="submit" mat-raised-button class="indigo right white-text">
-        Add Task</button>
-</form>
-
-<div *ngIf="!addTask">
-    <table *ngIf="tasks && tasks.length > 0" class="highlight">
-        <tbody>
-            <tr *ngFor="let task of tasks; let i = index">
-                <td>{{task.title}}</td>
-                <td class="right small-text">{{task.date | date:shortDate}}</td>
-            </tr>
-        </tbody>
-    </table>
+    <form *ngIf="addTask" [formGroup]="addForm" (submit)="submitForm()" class="row white pd-20">
+        <mat-form-field class="col s12">
+            <mat-label>Task Alloted</mat-label>
+            <input matInput formControlName="title" type="text">
+        </mat-form-field>
+        <mat-form-field class="col s12">
+            <mat-label>Description</mat-label>
+            <input matInput formControlName="description" type="text">
+        </mat-form-field>
+        <div class="col s12 m6"></div>
+        <button mat-button type="button" (click)="addTask = !addTask" class="left col s12 m3">Cancel</button>
+        <button [disabled]="!addForm.valid" type="submit" mat-raised-button class="indigo white-text col s12 m3">Add
+            Task</button>
+    </form>
+    <br>
+    <mat-accordion *ngIf="tasks.length > 0" class="row">
+        <mat-expansion-panel *ngFor="let item of tasks" class="col s12">
+            <mat-expansion-panel-header>
+                <mat-panel-title>
+                    {{item.title}}
+                </mat-panel-title>
+            </mat-expansion-panel-header>
+            <p>{{item.description}}</p>
+            <div class="left valign-wrapper">
+                <mat-icon>access_time</mat-icon> <span style="padding-left: 20px;">{{item.date | date:shortDate}}</span>
+            </div>
+            <button mat-button class="right blue-grey darken-4 white-text">Mark Task Completed</button>
+        </mat-expansion-panel>
+    </mat-accordion>
     <app-no-data *ngIf="!tasks || tasks.length == 0" [text]="'No task added'"></app-no-data>
 </div>
