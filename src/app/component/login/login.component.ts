@@ -32,15 +32,14 @@ export class LoginComponent implements OnInit {
 
     submit(): void {
         this.loading = !this.loading;
-
         this._login.postData(this.loginForm.value).subscribe(
             res => {
-                // console.log(res.token);
-                jwt_decode(res.token);
-                localStorage.setItem('token', res.token);
+                if (res.role === 'intern') {
+                    localStorage.setItem('token', res.token);
+                    this.router.navigate(['usip/intern']);
+                }
+                this.toast.error('Login credentials not valid', 'Forbidden');
                 this.loading = !this.loading;
-                if (jwt_decode(res.token).admin) this.router.navigate(['/admin/dashboard']);
-                else this.router.navigate(['usip/intern']);
             },
             err => {
                 this.loading = !this.loading;

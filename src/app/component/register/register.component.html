@@ -1,69 +1,73 @@
 <app-spinner *ngIf="loading"></app-spinner>
-<div class="container row" *ngIf="is_application_allowed && !loading">
-    <mat-card class="col center s12 offset-l3 offset-m2 l6 m8 card pd-20 white mat-elevation-z8">
-        <br>
-        <mat-card-title>
-            <h4 class="mg-0 pd-10 pdt-20 grey-text text-darken-2">Internship Application form</h4>
-        </mat-card-title>
-        <mat-card-content>
-            <form class="left-align row pd-20" (submit)="submitForm()" [formGroup]="registerationForm">
-                <mat-form-field class="col m8 s12">
-                    <mat-label>Name</mat-label>
-                    <input formControlName="name" type="text" placeholder="Sachin Duhan" matInput required>
-                    <mat-icon matPrefix>account_circle</mat-icon>
-                </mat-form-field>
 
-                <mat-form-field class="col m4 s12">
-                    <mat-label>Branch</mat-label>
-                    <input formControlName="branch" matInput type="text" matInput placeholder="MCE" required>
-                    <mat-icon matPrefix>laptop</mat-icon>
-                </mat-form-field>
+<div class="container">
+    <br><br>
+    <div class="row" *ngIf="is_application_allowed && !loading">
+        <mat-card class="col center s12 offset-l3 offset-m2 l6 m8 card pd-20 white mat-elevation-z8">
+            <br>
+            <mat-card-title>
+                <h4 class="mg-0 pd-10 pdt-20 grey-text text-darken-2">Internship Application form</h4>
+            </mat-card-title>
+            <mat-card-content>
+                <form class="left-align row pd-20" (submit)="submitForm()" [formGroup]="registerationForm">
+                    <mat-form-field class="col m8 s12">
+                        <mat-label>Name</mat-label>
+                        <input formControlName="name" type="text" placeholder="Sachin Duhan" matInput required>
+                        <mat-icon matPrefix>account_circle</mat-icon>
+                    </mat-form-field>
 
-                <mat-form-field class="col m8 s12">
-                    <mat-label>Roll Number</mat-label>
-                    <input formControlName="rollNo" type="text" matInput placeholder="2k17/MC/087" required>
-                    <mat-icon matPrefix>account_balance</mat-icon>
-                </mat-form-field>
+                    <mat-form-field class="col m4 s12">
+                        <mat-label>Branch</mat-label>
+                        <input formControlName="branch" matInput type="text" matInput placeholder="MCE" required>
+                        <mat-icon matPrefix>laptop</mat-icon>
+                    </mat-form-field>
 
-                <mat-form-field class="col m4 s12">
-                    <mat-label>SGPA</mat-label>
-                    <input formControlName="marks" type="number" placeholder="9.3" matInput required>
-                    <mat-icon matPrefix>person</mat-icon>
-                </mat-form-field>
+                    <mat-form-field class="col m8 s12">
+                        <mat-label>Roll Number</mat-label>
+                        <input formControlName="rollNo" type="text" matInput placeholder="2k17/MC/087" required>
+                        <mat-icon matPrefix>account_balance</mat-icon>
+                    </mat-form-field>
 
-                <mat-form-field class="col m8 s12">
-                    <mat-label>Email</mat-label>
-                    <input formControlName="email" type="email" placeholder="duhan.sachin126@gmai.com" matInput required>
-                    <mat-icon matPrefix>email</mat-icon>
-                </mat-form-field>
+                    <mat-form-field class="col m4 s12">
+                        <mat-label>SGPA</mat-label>
+                        <input formControlName="marks" type="number" placeholder="9.3" matInput required>
+                        <mat-icon matPrefix>person</mat-icon>
+                    </mat-form-field>
 
-                <mat-form-field class="col m4 s12">
-                    <mat-label>Contact Number</mat-label>
-                    <input formControlName="phone" type="number" placeholder="8686861299" matInput required>
-                    <mat-icon matPrefix>phone</mat-icon>
-                </mat-form-field>
+                    <mat-form-field class="col m8 s12">
+                        <mat-label>Email</mat-label>
+                        <input formControlName="email" type="email" placeholder="duhan.sachin126@gmai.com" matInput required>
+                        <mat-icon matPrefix>email</mat-icon>
+                    </mat-form-field>
 
-                <mat-form-field class="col m12 s12">
-                    <mat-select multiple placeholder="Domains" formControlName="domain" required>
-                        <mat-option disabled>Kindly select any 2 domains only</mat-option>
-                        <mat-option *ngFor="let domain of domains" [value]="domain.title">{{domain.title}}
-                        </mat-option>
-                    </mat-select>
-                    <mat-icon matPrefix>work</mat-icon>
-                    <mat-hint class="left grey-text">Select any two domains</mat-hint>
-                    <mat-error class="right red-text">{{msg}}</mat-error>
-                </mat-form-field>
+                    <mat-form-field class="col m4 s12">
+                        <mat-label>Contact Number</mat-label>
+                        <input formControlName="phone" type="number" placeholder="8686861299" matInput required>
+                        <mat-icon matPrefix>phone</mat-icon>
+                    </mat-form-field>
 
-                <div class="input-field col m12 s12">
-                    <i class="material-icons blue-grey-text text-darken-4 prefix">security</i>
-                    <textarea formControlName="exp" maxlength="250" placeholder="Work Experience for domains" class="materialize-textarea validate" required id="icon-prefix"></textarea>
-                    <small [class.hidden]="registerationForm.get('exp').valid || registerationForm.get('exp').untouched" class="red-text right">Minimimun 100 words needed</small>
-                </div>
+                    <mat-form-field class="col m12 s12">
+                        <mat-select multiple placeholder="Domains" formControlName="domain" required>
+                            <mat-option disabled>Kindly select any 2 domains only</mat-option>
+                            <mat-option *ngFor="let domain of domains" [value]="domain.title">{{domain.title}}
+                            </mat-option>
+                        </mat-select>
+                        <mat-icon matPrefix>work</mat-icon>
+                        <mat-hint class="left grey-text">Select any two domains</mat-hint>
+                        <mat-error class="right red-text">{{msg}}</mat-error>
+                    </mat-form-field>
 
-                <button class="col indigo white-text m6 s6 offset-m3 offset-s3" mat-raised-button type="submit" [disabled]="!registerationForm.valid">Submit</button>
-            </form>
-        </mat-card-content>
-    </mat-card>
+                    <div class="input-field col m12 s12">
+                        <i class="material-icons blue-grey-text text-darken-4 prefix">security</i>
+                        <textarea formControlName="exp" maxlength="250" placeholder="Work Experience for domains" class="materialize-textarea validate" required id="icon-prefix"></textarea>
+                        <small [class.hidden]="registerationForm.get('exp').valid || registerationForm.get('exp').untouched" class="red-text right">Minimimun 100 words needed</small>
+                    </div>
+
+                    <button class="col indigo white-text m6 s6 offset-m3 offset-s3" mat-raised-button type="submit" [disabled]="!registerationForm.valid">Submit</button>
+                </form>
+            </mat-card-content>
+        </mat-card>
+    </div>
 </div>
 
 <div *ngIf="!is_application_allowed && !loading" class="center valign-wrapper" style="min-height: 70vh;">
