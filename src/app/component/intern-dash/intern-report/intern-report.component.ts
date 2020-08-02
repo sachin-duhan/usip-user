@@ -1,20 +1,28 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
 import { ReportService } from '../../../service/report.service';
-import * as jwt_decode from 'jwt-decode';
 import { ToastrService } from 'ngx-toastr';
-import { environment } from 'src/environments/environment';
+import { InternService } from 'src/app/service/intern.service';
+import { Router } from '@angular/router';
+import { LoginService } from 'src/app/service/login.service';
+import { Subscription } from 'rxjs';
+
 @Component({
     selector: 'app-intern-report',
     templateUrl: './intern-report.component.html',
     styleUrls: ['./intern-report.component.css']
 })
 export class InternReportComponent implements OnInit {
-    constructor(private fb: FormBuilder,
+    constructor(
+        private fb: FormBuilder,
+        private _intern: InternService,
         private _report: ReportService,
-        private _toast: ToastrService) { }
-    public addReport: boolean = false;
+        private router: Router,
+        private _auth: LoginService,
+        private _toast: ToastrService
+    ) { }
 
+    public addReport: boolean = false;
     loading: Boolean = false;
     public reports: Array<any> = [];
 
@@ -25,8 +33,10 @@ export class InternReportComponent implements OnInit {
     })
 
     ngOnInit() {
-        this._report.get_all_intern_report(jwt_decode(localStorage.getItem('token')).id)
-            .subscribe(res => this.reports = res.body);
+        this._intern.intern_value_from_service.subscribe(res => {
+            if (!res) this.router.navigateByUrl('/usip/intern');
+            else this.reports = res.reports;
+        });
     }
 
     fileData: File = null; //this contain the file details for the report!!
@@ -41,7 +51,7 @@ export class InternReportComponent implements OnInit {
         if (this.addForm.get('start').value > this.addForm.get('end').value) {
             this._toast.warning('Kindly check the start & end Date', 'Oops!');
         } else {
-            const id = jwt_decode(localStorage.getItem('token')).id;
+            const id = this._auth.get_intern_id();
             let formData = new FormData();
             this.loading = !this.loading;
             formData.append('image', this.fileData, this.fileData.name);
@@ -53,9 +63,12 @@ export class InternReportComponent implements OnInit {
                 this.addReport = !this.addReport;
                 this.loading = !this.loading;
                 console.log(res);
-                if (res.success)
+                if (res.success) {
+                    this.reports.unshift(res.body);
+                    this.addForm.reset();
+                    this.addForm.markAsUntouched();
                     this._toast.success(res.message, 'Done');
-                else this._toast.warning(res.message, "OOPS");
+                } else this._toast.warning(res.message, "OOPS");
             }, err => {
                 this.loading = !this.loading;
                 console.log(err);
@@ -68,6 +81,6 @@ export class InternReportComponent implements OnInit {
         this._report.deleteReport(id).subscribe(res => {
             this._toast.success(res.message, 'Done');
             this.reports.splice(index, 1);
-        }, err => this._toast.error(err.message, 'OOPS...'));
+        }, err => this._toast.error(err.message, 'OOPS!'));
     }
 }

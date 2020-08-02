@@ -1,9 +1,8 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
 import { TasksService } from '../../../service/tasks.service';
-import * as jwt_decode from 'jwt-decode';
 import { ToastrService } from 'ngx-toastr';
-import { MatAccordion } from '@angular/material';
+import { LoginService } from 'src/app/service/login.service';
 
 @Component({
     selector: 'app-intern-tasks',
@@ -13,16 +12,18 @@ import { MatAccordion } from '@angular/material';
 
 export class InternTasksComponent implements OnInit {
 
-    constructor(private fb: FormBuilder,
+    constructor(
+        private fb: FormBuilder,
         private _task: TasksService,
-        private _toast: ToastrService) { }
+        private _login: LoginService,
+        private _toast: ToastrService
+    ) { }
 
     public addTask: Boolean = false;
-
     public tasks: Array<any> = [];
     ngOnInit() {
-        const credentials = jwt_decode(localStorage.getItem('token'));
-        this._task.get_intern_task(credentials.id).subscribe(res => {
+        const id = this._login.get_intern_id();
+        this._task.get_intern_task(id).subscribe(res => {
             this.tasks = res.body;
         });
     }
@@ -30,12 +31,17 @@ export class InternTasksComponent implements OnInit {
     addForm = this.fb.group({
         title: ['', Validators.required],
         description: ['', Validators.required],
-        date: Date.now()
+        date: Date.now(),
+        deadline: ['', Validators.required]
     });
 
     submitForm(): void {
-        const credentials = jwt_decode(localStorage.getItem('token'));
-        const task = { ...this.addForm.value, pInfo: credentials.id };
+        if (this.addForm.get('deadline').value <= Date.now()) {
+            this._toast.error("Kindly choose a valid date please.", "Oops");
+            return;
+        }
+        const id = this._login.get_intern_id();
+        const task = { ...this.addForm.value, pInfo: id };
         this._task.add_new_task(task).subscribe(res => {
             this._toast.success(res.message, 'Done');
             this.tasks.push(res.body);

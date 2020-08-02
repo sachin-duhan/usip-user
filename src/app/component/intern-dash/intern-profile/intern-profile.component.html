@@ -1,9 +1,4 @@
-<div class="push_bottom" (click)="openPassword()">
-    <button mat-fab matTooltip="Edit Password" matTooltipPosition="left" class="red">
-        <mat-icon class="white-text">edit</mat-icon>
-    </button>
-</div>
-<div class="row" *ngIf="!loading">
+<div class="row">
     <div class="col m8 s12 pd-40">
         <mat-card class="mg-20" id="mat-card">
             <mat-card-title>{{intern.name | titlecase}}
@@ -100,11 +95,15 @@
             </mat-card-content>
         </mat-card>
     </div>
-    <div class="col hide-on-small-and-down show-on-medium-and-up pd-40 m4 center">
-        <br> <br>
+    <div class="col hide-on-med-and-down pd-40 m4 center">
+        <br><br>
         <h3 class="mat-h2 mg-0 pd-10">Delhi Technological University</h3>
         <img class="responsive-img circle" src="https://upload.wikimedia.org/wikipedia/en/b/b5/DTU%2C_Delhi_official_logo.png" />
         <h4 class="mat-h3 mg-0 pd-10">University Student Internship Programme</h4>
     </div>
 </div>
-<app-spinner *ngIf="loading"></app-spinner>
+<div class="push_bottom" (click)="openPassword()">
+    <button mat-fab matTooltip="Edit Password" matTooltipPosition="left" class="red">
+        <mat-icon class="white-text">edit</mat-icon>
+    </button>
+</div>

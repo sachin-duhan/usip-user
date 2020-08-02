@@ -6,7 +6,7 @@
                 <mat-icon class="indigo-text right">people</mat-icon>
             </mat-card-title>
             <mat-card-content>
-                <table *ngIf="isPublicNoti" class="highlight">
+                <table *ngIf="pNotification.length > 0" class="highlight">
                     <tbody>
                         <tr *ngFor="let noti of pNotification">
                             <td>{{noti.title}}
@@ -15,7 +15,7 @@
                         </tr>
                     </tbody>
                 </table>
-                <app-no-data *ngIf="!isPublicNoti" [text]="'No Public Notifications found'" #noPNoti></app-no-data>
+                <app-no-data *ngIf="pNotification.length == 0" [text]="'No Public Notifications found'" #noPNoti></app-no-data>
             </mat-card-content>
         </mat-card>
     </div>
@@ -27,7 +27,7 @@
                 <mat-icon class="indigo-text right">person</mat-icon>
             </mat-card-title>
             <mat-card-content>
-                <table *ngIf="isPrivateNoti" class="highlight">
+                <table *ngIf="internNotification.length > 0" class="highlight">
                     <tbody>
                         <tr *ngFor="let noti of internNotification">
                             <td>{{noti.title}}
@@ -36,7 +36,7 @@
                         </tr>
                     </tbody>
                 </table>
-                <app-no-data [text]="'No Intern Notifications found'" *ngIf="!isPrivateNoti"></app-no-data>
+                <app-no-data [text]="'No Intern Notifications found'" *ngIf="internNotification.length == 0"></app-no-data>
             </mat-card-content>
         </mat-card>
     </div>

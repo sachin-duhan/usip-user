@@ -3,7 +3,7 @@ import { BreakpointObserver, Breakpoints } from '@angular/cdk/layout';
 import { Observable } from 'rxjs';
 import { InternService } from '../../../service/intern.service'
 import { map } from 'rxjs/operators';
-import { MatDialog, MatBottomSheet, MatDialogConfig } from '@angular/material';
+import { MatDialog, MatDialogConfig } from '@angular/material';
 import { RegisterService } from '../../../service/register.service';
 import * as jwt_decode from 'jwt-decode';
 import { BankDetailsFormComponent } from '../../intern-dash/bank-details-form/bank-details-form.component';
@@ -17,7 +17,8 @@ import { LoginService } from '../../../service/login.service';
     styleUrls: ['./intern-dash-nav.component.css']
 })
 export class InternDashNavComponent implements OnInit {
-    constructor(
+
+    constructor (
         private breakpointObserver: BreakpointObserver,
         public dialog: MatDialog,
         private _registerService: RegisterService,
@@ -28,23 +29,26 @@ export class InternDashNavComponent implements OnInit {
     ) { }
 
     public internDetails;
+    public loading : boolean = false;
     public name: string = "Loading...";
     public open: boolean = false;
-    isHandset$: Observable<boolean> = this.breakpointObserver.observe(Breakpoints.Handset).pipe(map(result => result.matches));
+    public isHandset$: Observable<boolean> = this.breakpointObserver.observe(Breakpoints.Handset).pipe(map(result => result.matches));
 
     ngOnInit() {
-        const credentials = jwt_decode(this._auth.getToken());
-        setInterval(() => { if (!this._auth.loggedIn()) this._auth.logout() }, 1000);
-        this._intern.get_specific_intern_by_id(credentials.id).subscribe(res => {
-            this.name = res.pInfo.name;
-            this.internDetails = res;
-        }, err => {
-            setTimeout(() => {
+        this.loading = true;
+        this._registerService.applicationStatus('bank').subscribe(res => this.open = res.status);
+        this._intern.get_complete_intern_data(this._auth.get_intern_id()).subscribe(
+            res => {
+                this._intern.cache_intern_data(res.body);
+                this.internDetails = res.body.intern;
+                this.name = this.internDetails.pInfo.name;
+                this.loading =  false;
+            }, err => setTimeout(() => {
+                this.loading = false;
                 this._toast.error('You are not unautherised!', 'Contact Admin');
                 this.router.navigateByUrl('/');
-            }, 100);
-        });
-        this._registerService.applicationStatus('bank').subscribe(res => this.open = res.status);
+            }, 100)
+        );
     }
 
     openFormDialog() {

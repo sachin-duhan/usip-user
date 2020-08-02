@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { Observable } from 'rxjs';
+import { Observable, BehaviorSubject } from 'rxjs';
 import { environment } from 'src/environments/environment.prod';
 
 const headers = require('../@constants/main').headers;
@@ -15,6 +15,14 @@ export class InternService {
 
     private _urlGetIntern = environment.apiBaseURL + '/intern'; // URL = localhost:4000/intern
     private _urlRegister = this._urlGetIntern + '/register';
+
+    private intern_data = new BehaviorSubject(null);
+    public intern_value_from_service = this.intern_data.asObservable();
+    cache_intern_data(value) { this.intern_data.next(value); }
+
+    get_complete_intern_data(id:string): Observable<any> {
+        return this.http.get(`${environment.apiBaseURL}/dashboard/intern/${id}`,{headers});
+    }
 
     showRegisterIntern(): Observable<any> {
         return this.http.get<any>(this._urlRegister, { headers });

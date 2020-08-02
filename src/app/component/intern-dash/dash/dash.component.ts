@@ -1,14 +1,10 @@
 import { Component } from '@angular/core';
-
 import { InternProfileComponent } from '../intern-profile/intern-profile.component';
 import { InternReportComponent } from '../intern-report/intern-report.component';
-
 import { MatDialog } from '@angular/material';
-import { NotifyService } from '../../../service/notify.service';
-import { ReportService } from '../../../service/report.service';
 
-import * as jwt_decode from 'jwt-decode';
 import { InternService } from '../../../service/intern.service'
+import { LoginService } from 'src/app/service/login.service';
 
 @Component({
     selector: 'app-intern-dash',
@@ -18,10 +14,6 @@ import { InternService } from '../../../service/intern.service'
 export class InternDashComponent {
 
     public internNoti: Array<any> = [];
-    public report: Array<any> = [];
-
-    public isReport: Boolean = false;
-    public isPrivateNoti: Boolean = false;
 
     public internDetails: any;
     public officerDetails: any;
@@ -29,35 +21,32 @@ export class InternDashComponent {
 
     constructor(
         public dialog: MatDialog,
-        private _notfi: NotifyService,
-        private _report: ReportService,
         private _intern: InternService,
+        private _login: LoginService,
     ) { }
 
     ngOnInit() {
-        const credentials = jwt_decode(localStorage.getItem('token'));
-        this.settingVariables();
-        this._intern.get_specific_intern_by_id(credentials.id)
-            .subscribe(res => {
-                this.internDetails = res;
-                this.officerDetails = this.internDetails.repOfficer;
-            });
-    }
-
-    openProfile() {
-        this.dialog.open(InternProfileComponent);
-    }
-    openAddReport() { this.dialog.open(InternReportComponent) }
-    settingVariables() {
-        this._notfi.internNotification().subscribe(res => {
-            if (res.success && Array.isArray(res.body) && res.body.length > 0) this.isPrivateNoti = true;
-            this.internNoti = res.body;
+        this._intern.intern_value_from_service.subscribe(res => {
+            if (!res)
+                this.get_data();
+            else this.value_setter(res);
         });
-
-        this._report.get_all_intern_report(jwt_decode(localStorage.getItem('token')).id)
-            .subscribe(res => {
-                if (res.success && Array.isArray(res.body) && res.body.length > 0) this.isReport = true;
-                this.report = res.body;
-            });
     }
+
+    get_data() {
+        this._intern.get_complete_intern_data(this._login.get_intern_id()).subscribe(
+            res => {
+                this.value_setter(res.body);
+                this._intern.cache_intern_data(res.body);
+            }, err => this._login.logout()
+        );
+    }
+
+    value_setter(data) {
+        this.internDetails = data.intern;
+        this.officerDetails = data.intern.repOfficer;
+    }
+
+    openProfile() { this.dialog.open(InternProfileComponent) }
+    openAddReport() { this.dialog.open(InternReportComponent) }
 }

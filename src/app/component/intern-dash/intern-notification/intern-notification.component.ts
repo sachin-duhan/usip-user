@@ -2,6 +2,9 @@ import { Component, OnInit } from '@angular/core';
 
 import { NotifyService } from '../../../service/notify.service'
 import { ToastrService } from 'ngx-toastr';
+import { InternService } from 'src/app/service/intern.service';
+import { Router } from '@angular/router';
+import { Subscription } from 'rxjs';
 @Component({
     selector: 'app-intern-notification',
     templateUrl: './intern-notification.component.html',
@@ -9,25 +12,26 @@ import { ToastrService } from 'ngx-toastr';
 })
 
 export class InternNotificationComponent implements OnInit {
+
+    public service_subscription: Subscription;
     constructor(
-        private _notify: NotifyService,
-        private _toast: ToastrService
+        private _intern: InternService,
+        private _router: Router
     ) { }
     public pNotification: Array<any> = [];
     public internNotification: Array<any> = [];
 
-    public isPublicNoti: Boolean = false;
-    public isPrivateNoti: Boolean = false;
-
     ngOnInit() {
-        this._notify.internNotification().subscribe(res => {
-            if (!res.body || res.body.length > 0) this.isPrivateNoti = true;
-            this.internNotification = res.body;
-        }, err => this._toast.warning('Reports not fetched!', 'Error'));
-
-        this._notify.publicNotification().subscribe(res => {
-            if (!res.body || res.body.length > 0) this.isPublicNoti = true;
-            this.pNotification = res.body;
-        }, err => this._toast.warning('Reports not fetched!', 'Error'));
+        this.service_subscription = this._intern.intern_value_from_service.subscribe(data => {
+            if (!data) this._router.navigateByUrl('/usip/intern');
+            else {
+                data.notifications.forEach(notification => {
+                    if (notification.visiblity) this.pNotification.push(notification);
+                    else this.internNotification.push(notification);
+                });
+            }
+        })
     }
+
+    ngOnDestroy() { this.service_subscription.unsubscribe(); }
 }

@@ -37,11 +37,16 @@ export class LoginService {
     }
 
     loggedIn(): boolean {
-        let credentials = null;
+        let credentials;
         if (localStorage.getItem(token_name))
             credentials = jwt_decode(this.getToken());
+        const curr_time = new Date().getTime();
+        // console.log(credentials);
+        if (credentials.exp > curr_time) return false;
         return !!localStorage.getItem(token_name) && credentials.role === 'intern';
     }
+
+    get_intern_id(): string { return jwt_decode(this.getToken()).id; }
 
     logout() {
         localStorage.removeItem(token_name);
