@@ -42,7 +42,7 @@ export class LoginService {
             credentials = jwt_decode(this.getToken());
         const curr_time = new Date().getTime();
         // console.log(credentials);
-        if (credentials.exp > curr_time) return false;
+        if (credentials && credentials.exp > curr_time) return false;
         return !!localStorage.getItem(token_name) && credentials.role === 'intern';
     }
 
