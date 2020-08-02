@@ -1,75 +1,50 @@
 import { Injectable } from '@angular/core';
-import { HttpClient, HttpHeaders, HttpErrorResponse } from '@angular/common/http';
-import {Login} from '../model/login';
-import {environment} from 'src/environments/environment.prod';
+import { HttpClient } from '@angular/common/http';
+import { environment } from 'src/environments/environment.prod';
 import { Observable } from 'rxjs';
-import { ToastrService } from 'ngx-toastr';
+import { Router } from '@angular/router';
+
+import * as jwt_decode from 'jwt-decode';
+const token_name = 'usip_intern_token';
+const headers = require('../@constants/main').headers;
 
 @Injectable({
-  providedIn: 'root'
+    providedIn: 'root'
 })
 
 export class LoginService {
-  constructor(private http: HttpClient,
-    private toast: ToastrService) { }
+    constructor(private http: HttpClient, private _router: Router) { }
+    private _url = environment.apiBaseURL + '/user';
 
-/********************************************
+    postData(data): Observable<any> {
+        return this.http.post<any>(this._url + '/login', data);
+    }
 
-=> base url -> '/user'
+    getData(): Observable<any> {
+        return this.http.get<any>(this._url + '/signup', { headers });
+    }
 
-* GET    /signup = intern having login access!
-* POST   /signup = creating a intern access!
-* DELETE /:id = removing an intern
-* GET    /:id = info of a particular intern
-* POST   /login = login to dashboard
-* PUT    /password = updating password!
+    editPassword(id, data): Observable<any> {
+        return this.http.put<any>(this._url + '/password/' + id, data, { headers });
+    }
 
-********************************************/
+    setToken(token: string) {
+        localStorage.setItem(token_name, token);
+    }
 
-  private _url = environment.apiBaseURL + '/user';
+    getToken() {
+        return localStorage.getItem(token_name);
+    }
 
-  public headers = new HttpHeaders({
-    'Content-Type':  'application/json',
-    'Authorization': 'my-auth-token'
-  });
+    loggedIn(): boolean {
+        let credentials = null;
+        if (localStorage.getItem(token_name))
+            credentials = jwt_decode(this.getToken());
+        return !!localStorage.getItem(token_name) && credentials.role === 'intern';
+    }
 
-  //making an user for intership
-  makeLoginCredentials(data):Observable<any>{
-    const url = this._url + '/signup';
-    return this.http.post<any>(url,data,{
-      headers:this.headers
-    })
-  }
-
-  //getting the access
-  postData(data): Observable<any> {
-    const url = this._url + '/login';
-    return this.http.post<any>(url, data);
-  }
-
-  //admin 
-  getData(): Observable<Login[]> {
-    const url = this._url + '/signup';
-    return this.http.get<Login[]>(url,{headers: this.headers});
-  }
-
-  editPassword(id,data): Observable<any> {
-    const url = this._url + '/password/'+id;
-    return this.http.put<any>(url, data, {headers: this.headers});
-  }
-
-  //deleting the user details : 
-  deleteIntern(id):Observable<any>{
-    return this.http.delete(this._url+'/'+id,{
-      headers:this.headers
-    });
-  }
-
-  loggedIn(){
-    return !!localStorage.getItem('token');
-  }
-
-  getToken(){
-    return localStorage.getItem('token');
-  }
+    logout() {
+        localStorage.removeItem(token_name);
+        this._router.navigateByUrl('/');
+    }
 }

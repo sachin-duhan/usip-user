@@ -18,15 +18,11 @@ export class NotificationComponent implements OnInit {
 
     constructor(private _notificationService: NotifyService) { }
     ngOnInit() {
-        this._notificationService.publicNotification().subscribe(
-            res => {
+        this._notificationService.publicNotification()
+            .subscribe(res => {
                 this.publicNotification = res.body;
-                this.loading != this.loading;
                 this.activePageDataChunk = this.publicNotification.slice(0, this.pageSize);
-            }, err => {
-                console.log(err);
-            }
-        );
+            }, err => console.log(err));
     }
 
     setPageSizeOptions(setPageSizeOptionsInput: string) {

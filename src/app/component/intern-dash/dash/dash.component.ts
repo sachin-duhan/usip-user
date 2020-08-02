@@ -2,7 +2,6 @@ import { Component } from '@angular/core';
 
 import { InternProfileComponent } from '../intern-profile/intern-profile.component';
 import { InternReportComponent } from '../intern-report/intern-report.component';
-import { InternTasksComponent } from '../intern-tasks/intern-tasks.component';
 
 import { MatDialog } from '@angular/material';
 import { NotifyService } from '../../../service/notify.service';

@@ -17,7 +17,6 @@ import { ToastrModule } from 'ngx-toastr';
 // Service are meant to be addded to the providers
 import { InternService } from './service/intern.service';
 import { RegisterService } from './service/register.service';
-import { OfficerService } from './service/officer.service';
 import { NotifyService } from './service/notify.service';
 import { LoginService } from './service/login.service';
 import { ReportService } from './service/report.service';
@@ -151,7 +150,6 @@ import { NoDataComponent } from './component/utility/no-data/no-data.component';
   providers: [
     InternService,
     RegisterService,
-    OfficerService,
     TasksService,
     NotifyService,
     ReportService,

@@ -17,26 +17,24 @@ import { LoginService } from '../../../service/login.service';
     styleUrls: ['./intern-dash-nav.component.css']
 })
 export class InternDashNavComponent implements OnInit {
-    constructor(private breakpointObserver: BreakpointObserver,
-        public dialog: MatDialog, private bottomSheet: MatBottomSheet,
+    constructor(
+        private breakpointObserver: BreakpointObserver,
+        public dialog: MatDialog,
         private _registerService: RegisterService,
         private router: Router,
         private _toast: ToastrService,
         private _auth: LoginService,
-        private _intern: InternService) { }
+        private _intern: InternService
+    ) { }
 
-    // intern details 
     public internDetails;
-    public name: string = "";
+    public name: string = "Loading...";
     public open: boolean = false;
     isHandset$: Observable<boolean> = this.breakpointObserver.observe(Breakpoints.Handset).pipe(map(result => result.matches));
 
-    ngOnInit(): void {
-        const credentials = jwt_decode(localStorage.getItem('token'));
-        setInterval(() => {
-            if (!this._auth.loggedIn() && (credentials.exp < Date.now())) { this.router.navigateByUrl('/'); }
-        }, 1000);
-
+    ngOnInit() {
+        const credentials = jwt_decode(this._auth.getToken());
+        setInterval(() => { if (!this._auth.loggedIn()) this._auth.logout() }, 1000);
         this._intern.get_specific_intern_by_id(credentials.id).subscribe(res => {
             this.name = res.pInfo.name;
             this.internDetails = res;
@@ -46,14 +44,10 @@ export class InternDashNavComponent implements OnInit {
                 this.router.navigateByUrl('/');
             }, 100);
         });
-
-        // get the bank status!
-        this._registerService.applicationStatus('bank').subscribe(res => {
-            this.open = res.status;
-        });
+        this._registerService.applicationStatus('bank').subscribe(res => this.open = res.status);
     }
 
-    openFormDialog(): void {
+    openFormDialog() {
         const bankDetails = {
             bankName: this.internDetails.bankName,
             bankAc: this.internDetails.bankAc,
@@ -61,27 +55,22 @@ export class InternDashNavComponent implements OnInit {
             phone: this.internDetails.pInfo.phone,
             email: this.internDetails.pInfo.email
         }
+
         if (this.open) {
             let ref;
             const config = new MatDialogConfig();
             config.data = bankDetails;
             ref = this.dialog.open(BankDetailsFormComponent, config);
-
             ref.afterClosed().subscribe(result => {
                 if (result.bankAc != this.internDetails.bankName && this.internDetails.bankAc) {
-                    this._intern.update_intern_bank_details(this.internDetails._id, result)
-                        .subscribe(res => this._toast.success(res.message),
-                            err => this._toast.error(err.error.message, 'Faliure'));
+                    this._intern.update_intern_bank_details(this.internDetails._id, result).subscribe(
+                        res => this._toast.success(res.message),
+                        err => this._toast.error(err.error.message, 'Faliure')
+                    );
                 }
             });
-        } else {
-            this._toast.warning('Bank details update are not allowed by ADMIN', 'OOPS...');
-        }
+        } else this._toast.warning('Bank details update are not allowed by ADMIN', 'OOPS...');
     }
 
-    logout(): void {
-        window.localStorage.clear();
-        window.localStorage.setItem('logout', 'ok');
-        this.router.navigateByUrl('/');
-    }
+    logout() { this._auth.logout(); }
 }
