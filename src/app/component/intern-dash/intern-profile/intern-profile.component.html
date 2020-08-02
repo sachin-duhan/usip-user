@@ -4,7 +4,7 @@
             <mat-card-title>{{intern.name | titlecase}}
                 <mat-icon class="right blue-grey-text text-darken-2 pdr-10 pdt-10">dashboard</mat-icon>
             </mat-card-title>
-            <mat-card-subtitle>{{period.start | date:shortDate}} - {{period.end | date:shortDate}}
+            <mat-card-subtitle>{{period.start | date:'shortDate'}} - {{period.end | date:'shortDate'}}
                 <div class="right small-font">{{intern.phone}}</div>
             </mat-card-subtitle>
 
