@@ -29,3 +29,12 @@ mat-card-content {
 .small-font-12 {
     margin-top: 7px;
 }
+
+.notification-container {
+    margin-bottom: 12px;
+}
+
+.notification-container h6 {
+    font-size: 20px;
+    font-weight: 450;
+}

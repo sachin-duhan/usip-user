@@ -14,15 +14,17 @@ export class NotificationComponent implements OnInit {
 
     activePageDataChunk: Array<any> = [];
     pageSize = 5;
-    pageSizeOptions: number[] = [5, 10, 15];
+    pageSizeOptions: number[] = [1, 5, 10, 15];
 
     constructor(private _notificationService: NotifyService) { }
     ngOnInit() {
+        this.loading = true;
         this._notificationService.publicNotification()
             .subscribe(res => {
+                this.loading = false;
                 this.publicNotification = res.body;
                 this.activePageDataChunk = this.publicNotification.slice(0, this.pageSize);
-            }, err => console.log(err));
+            }, err => this.loading = false);
     }
 
     setPageSizeOptions(setPageSizeOptionsInput: string) {
