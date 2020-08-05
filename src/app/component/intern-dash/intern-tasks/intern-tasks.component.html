@@ -41,9 +41,13 @@
                 </mat-panel-description>
             </mat-expansion-panel-header>
             <p>{{item.description}}</p>
-            <div class="left valign-wrapper">
+            <div class="valign-wrapper">
                 <mat-icon>access_time</mat-icon> <span style="padding-left: 20px;">
                     Assigned on - {{item.date | date:shortDate}}</span>
+            </div>
+            <div class="valign-wrapper">
+                <mat-icon>access_time</mat-icon> <span style="padding-left: 20px;">
+                    Deadline - {{item.deadline | date:shortDate}}</span>
             </div>
             <button mat-button (click)="mark_complete(item)" class="right blue-grey darken-4 white-text">
                 {{ item.is_completed ? "Mark Under progress" : "Mark Task Completed"}}</button>

@@ -5,7 +5,6 @@ import { InternService } from '../../../service/intern.service'
 import { map } from 'rxjs/operators';
 import { MatDialog, MatDialogConfig } from '@angular/material';
 import { RegisterService } from '../../../service/register.service';
-import * as jwt_decode from 'jwt-decode';
 import { BankDetailsFormComponent } from '../../intern-dash/bank-details-form/bank-details-form.component';
 import { ToastrService } from 'ngx-toastr';
 import { Router } from '@angular/router';
@@ -39,6 +38,7 @@ export class InternDashNavComponent implements OnInit {
         this._registerService.applicationStatus('bank').subscribe(res => this.open = res.status);
         this._intern.get_complete_intern_data(this._auth.get_intern_id()).subscribe(
             res => {
+                console.log(res);
                 this._intern.cache_intern_data(res.body);
                 this.internDetails = res.body.intern;
                 this.name = this.internDetails.pInfo.name;

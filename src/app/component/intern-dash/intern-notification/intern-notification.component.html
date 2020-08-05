@@ -6,16 +6,16 @@
                 <mat-icon class="indigo-text right">people</mat-icon>
             </mat-card-title>
             <mat-card-content>
-                <table *ngIf="pNotification.length > 0" class="highlight">
-                    <tbody>
-                        <tr *ngFor="let noti of pNotification">
-                            <td>{{noti.title}}
-                                <div class="right grey-text small-font">{{noti.date | date:shortDate}}</div>
-                            </td>
-                        </tr>
-                    </tbody>
-                </table>
-                <app-no-data *ngIf="pNotification.length == 0" [text]="'No Public Notifications found'" #noPNoti></app-no-data>
+                <div *ngIf="pNotification.length>0">
+                    <div *ngFor="let item of pNotification">
+                        <h5>{{item.title}}</h5>
+                        <p>{{item.description}}</p>
+                        <span class="right grey-text">{{item.date | date:shortDate}}</span>
+                        <br><br>
+                    </div>
+                </div>
+                <app-no-data *ngIf="pNotification.length == 0" [text]="'No Public Notifications found'" #noPNoti>
+                </app-no-data>
             </mat-card-content>
         </mat-card>
     </div>
@@ -27,16 +27,16 @@
                 <mat-icon class="indigo-text right">person</mat-icon>
             </mat-card-title>
             <mat-card-content>
-                <table *ngIf="internNotification.length > 0" class="highlight">
-                    <tbody>
-                        <tr *ngFor="let noti of internNotification">
-                            <td>{{noti.title}}
-                                <div class="right grey-text small-font">{{noti.date | date:shortDate}}</div>
-                            </td>
-                        </tr>
-                    </tbody>
-                </table>
-                <app-no-data [text]="'No Intern Notifications found'" *ngIf="internNotification.length == 0"></app-no-data>
+                <div *ngIf="internNotification.length>0">
+                    <div *ngFor="let item of internNotification">
+                        <h5>{{item.title}}</h5>
+                        <p>{{item.description}}</p>
+                        <span class="right grey-text">{{item.date | date:shortDate}}</span>
+                        <br><br>
+                    </div>
+                </div>
+                <app-no-data [text]="'No Intern Notifications found'" *ngIf="internNotification.length == 0">
+                </app-no-data>
             </mat-card-content>
         </mat-card>
     </div>
